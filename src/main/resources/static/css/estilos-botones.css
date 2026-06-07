@@ -1,0 +1,105 @@
+/* Botones Personalizados */
+.crd-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    margin: 2px;
+}
+
+.crd-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Boton Nuevo */
+.crd-btn-nuevo {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.crd-btn-nuevo:hover {
+    background-color: #45a049;
+    color: white;
+}
+
+/* Boton Ver Detalle */
+.crd-btn-detalle {
+    background-color: #2196F3;
+    color: white;
+}
+
+.crd-btn-detalle:hover {
+    background-color: #0b7dda;
+}
+
+/* Boton Editar */
+.crd-btn-editar {
+    background-color: #FF9800;
+    color: white;
+}
+
+.crd-btn-editar:hover {
+    background-color: #e68900;
+}
+
+/* Boton Eliminar */
+.crd-btn-eliminar {
+    background-color: #f44336;
+    color: white;
+}
+
+.crd-btn-eliminar:hover {
+    background-color: #da190b;
+}
+
+/* Boton Buscar */
+input[type="submit"] {
+    background-color: #008CBA;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+input[type="submit"]:hover {
+    background-color: #007399;
+}
+
+/* Botones Bootstrap personalizados */
+.btn-primary {
+    background-color: #2E7D32 !important;
+    border-color: #2E7D32 !important;
+}
+
+.btn-primary:hover {
+    background-color: #1B5E20 !important;
+    border-color: #1B5E20 !important;
+}
+
+.btn-success {
+    background-color: #4CAF50 !important;
+    border-color: #4CAF50 !important;
+}
+
+.btn-success:hover {
+    background-color: #388E3C !important;
+    border-color: #388E3C !important;
+}
+
+.btn-secondary {
+    background-color: #607D8B !important;
+    border-color: #607D8B !important;
+}
+
+.btn-secondary:hover {
+    background-color: #455A64 !important;
+    border-color: #455A64 !important;
+}

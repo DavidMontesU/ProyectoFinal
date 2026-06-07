@@ -32,4 +32,6 @@ public class Veterinario {
     @Column(name = "correo", length = 100)
     private String correo;
 
+    @Column(name = "nomEspecialidad", insertable = false, updatable = false)
+    private String nomEspecialidad;
 }

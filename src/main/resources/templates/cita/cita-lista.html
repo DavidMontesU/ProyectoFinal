@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Cita</title>
+<link rel="stylesheet" th:href="@{/css/estilos-botones.css}" />
+<link rel="stylesheet" th:href="@{/css/estilos-generales.css}" />
+<link rel="stylesheet" th:href="@{/css/estilos-tabla.css}" />
+<link rel="stylesheet" th:href="@{/css/formulario.css}" />
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12 mb-3">
+				<div class="d-flex justify-content-between align-items-center">
+					<h3 class="mb-0">Listado de Citas</h3>
+					<a th:href="@{/citas/nuevo}" class="crd-btn crd-btn-nuevo">Nueva
+						Cita</a>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-3 col-md-3 col-sm-3">
+				<h6 align="left" th:text="${cantReg} + ' registros encontrados'">0
+					registros encontrados</h6>
+			</div>
+			<div class="col-lg-7 col-md-7 col-sm-7">
+				<form th:action="@{/citas/buscar}" method="get"
+					class="cdr-formulario">
+					<label>Buscar por fecha (YYYY-MM-DD): </label> <input type="date"
+						name="fecha" required>
+
+					<button type="submit" class="crd-btn">Buscar</button>
+				</form>
+			</div>
+		</div>
+
+		<br />
+		<div class="row">
+			<div class="col-12">
+				<table class="table-minimal">
+					<thead>
+						<tr>
+							<th>Id-Cita</th>
+							<th>Mascota</th>
+							<th>Cliente</th>
+							<th>Veterinario</th>
+							<th>Fecha</th>
+							<th>Hora</th>
+							<th>Servicio</th>
+							<th>Estado</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="item : ${dataCitas}">
+							<td th:text="${item.idCita}"></td>
+							<td th:text="${item.nombreMascota}"></td>
+							<td th:text="${item.nombreCliente}"></td>
+							<td th:text="${item.nombreVet}"></td>
+							<td th:text="${item.fechaCita}"></td>
+							<td th:text="${item.horaCita}"></td>
+							<td th:text="${item.tipoServicio}"></td>
+							<td><span class="badge-estado"
+								th:classappend="'badge-' + ${#strings.toLowerCase(item.estado)}"
+								th:text="${item.estado}"> </span></td>
+							<td>
+								<form th:action="@{/citas/info/{id}(id=${item.idCita})}"
+									style="display: inline;">
+									<button type="submit" class="crd-btn crd-btn-detalle">Ver
+										Detalle</button>
+								</form>
+
+								<form th:action="@{/citas/infoEdit/{id}(id=${item.idCita})}"
+									method="get" style="display: inline;">
+									<button type="submit" class="crd-btn crd-btn-editar">Editar</button>
+								</form>
+
+								<form th:if="${item.estado == 'Atendida'}"
+									th:action="@{/historial/nuevo}" method="get"
+									style="display: inline;">
+									<input type="hidden" name="idCita" th:value="${item.idCita}">
+									<button type="submit" class="btn btn-success"
+										style="font-size: 12px; padding: 8px 12px; border-radius: 5px;">
+										📋 Historial</button>
+								</form>
+
+								<form th:action="@{/citas/eliminar/{id}(id=${item.idCita})}"
+									style="display: inline;"
+									onsubmit="return confirm('¿Seguro que deseas eliminar esta cita?');">
+									<button type="submit" class="crd-btn crd-btn-eliminar">Eliminar</button>
+								</form>
+							</td>
+						</tr>
+						<tr th:if="${#lists.isEmpty(dataCita)}">
+							<td colspan="9" class="text-center">No hay citas
+								registradas.</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

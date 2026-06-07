@@ -1,0 +1,26 @@
+@charset "ISO-8859-1";
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Contenedor principal */
+.page-wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #E8F5E9;
+}
+
+/* Contenido que empuja el footer */
+.page-content {
+    flex: 1;
+}
+
+/* Espacio visual antes del footer */
+.page-content {
+    flex: 1;
+    padding-bottom: 80px; /* 👈 separación clara del footer */
+}
+

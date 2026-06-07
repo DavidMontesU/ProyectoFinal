@@ -35,5 +35,11 @@ public class Mascota {
     @ManyToOne
     @JoinColumn(name = "idCliente")
     private Cliente cliente;
+    
+    @Column(name = "nombreEspecie", insertable = false, updatable = false)
+    private String nombreEspecie;
+
+    @Column(name = "nombreDueno", insertable = false, updatable = false)
+    private String nombreDueno;
 
 }

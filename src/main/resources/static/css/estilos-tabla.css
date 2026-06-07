@@ -1,0 +1,110 @@
+/* Estilos para tablas */
+.table-minimal {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table-minimal thead {
+    background: linear-gradient(135deg, #2E7D32 0%, #4CAF50 100%);
+    color: white;
+}
+
+.table-minimal thead th {
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.table-minimal tbody tr {
+    border-bottom: 1px solid #E0E0E0;
+    transition: background-color 0.3s ease;
+}
+
+.table-minimal tbody tr:hover {
+    background-color: #F5F5F5;
+}
+
+.table-minimal tbody tr:last-child {
+    border-bottom: none;
+}
+
+.table-minimal tbody td {
+    padding: 12px 15px;
+    font-size: 14px;
+    color: #333;
+}
+
+.table-minimal tbody td:last-child {
+    text-align: center;
+}
+
+/* Tabla responsive */
+@media screen and (max-width: 768px) {
+    .table-minimal {
+        font-size: 12px;
+    }
+    
+    .table-minimal thead th,
+    .table-minimal tbody td {
+        padding: 8px;
+    }
+}
+
+/* Estilos para celdas especiales */
+.table-minimal .text-center {
+    text-align: center;
+}
+
+.table-minimal .text-right {
+    text-align: right;
+}
+
+.table-minimal .text-success {
+    color: #4CAF50;
+    font-weight: 600;
+}
+
+.table-minimal .text-danger {
+    color: #f44336;
+    font-weight: 600;
+}
+
+.table-minimal .text-warning {
+    color: #FF9800;
+    font-weight: 600;
+}
+
+/* Badge para estados */
+.badge-estado {
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.badge-pendiente {
+    background-color: #FFF3E0;
+    color: #E65100;
+}
+
+.badge-confirmada {
+    background-color: #E3F2FD;
+    color: #0D47A1;
+}
+
+.badge-atendida {
+    background-color: #E8F5E9;
+    color: #1B5E20;
+}
+
+.badge-cancelada {
+    background-color: #FFEBEE;
+    color: #B71C1C;
+}

@@ -1,6 +1,9 @@
 package com.example.ControlDeCitas.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.example.ControlDeCitas.model.Mascota;
@@ -8,4 +11,6 @@ import com.example.ControlDeCitas.model.Mascota;
 @Repository
 public interface MascotaRepository extends JpaRepository<Mascota, Integer>{
 
+	@Query(value = "CALL sp_listarMascota()", nativeQuery = true)
+    List<Mascota> listarMascotas();
 }

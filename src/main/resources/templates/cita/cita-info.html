@@ -1,0 +1,45 @@
+<head>
+<link rel="stylesheet" th:href="@{/css/estilos-botones.css}" />
+<link rel="stylesheet" th:href="@{/css/estilos-generales.css}" />
+<link rel="stylesheet" th:href="@{/css/estilos-tabla.css}" />
+<link rel="stylesheet" th:href="@{/css/formulario.css}" />
+</head>
+
+<div class="container" style="margin-top:30px; margin-bottom:100px;">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="cdr-formulario">
+                <h3>Detalle de Cita</h3>
+                <hr>
+                <p><strong>Mascota:</strong> <span th:text="${dataCita.nombreMascota}"></span></p>
+                <p><strong>Cliente:</strong> <span th:text="${dataCita.nombreCliente}"></span></p>
+                <p><strong>Veterinario:</strong> <span th:text="${dataCita.nombreVet}"></span></p>
+                <p><strong>Servicio:</strong> <span th:text="${dataCita.tipoServicio}"></span></p>
+                <p><strong>Precio:</strong> S/. <span th:text="${dataCita.precio}"></span></p>
+                <p><strong>Fecha:</strong> <span th:text="${dataCita.fechaCita}"></span></p>
+                <p><strong>Hora:</strong> <span th:text="${dataCita.horaCita}"></span></p>
+                <p><strong>Estado:</strong> <span th:text="${dataCita.estado}"></span></p>
+                <hr>
+                
+                <p><strong>Motivo:</strong></p>
+                <p style="margin-left:15px;" th:text="${dataCita.motivo ?: '—'}"></p>
+                
+                <p><strong>Observaciones:</strong></p>
+                <p style="margin-left:15px;" th:text="${dataCita.observaciones ?: '—'}"></p>
+                <hr>
+                
+                <div class="d-flex justify-content-between">
+                    <a th:if="${dataCita.estado == 'Atendida'}" 
+                       th:href="@{/ServletHistorial(type='nuevo', idCita=${dataCita.idCita})}"
+                       class="crd-btn crd-btn-nuevo">
+                        📝 Registrar Historial Clínico
+                    </a>
+                    
+                    <a href="javascript:history.back()" class="crd-btn crd-btn-nuevo">
+					    Regresar
+					</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -11,16 +11,16 @@ public class Cita {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idCita")
-    private int idCita;
+    private Integer idCita;
 
     @Column(name = "idMascota")
-    private int idMascota;
+    private Integer idMascota;
 
     @Column(name = "idVet")
-    private int idVet;
+    private Integer idVet;
 
     @Column(name = "idTipoServicio")
-    private int idTipoServicio;
+    private Integer idTipoServicio;
 
     @Column(name = "fechaCita")
     private String fechaCita;
@@ -37,19 +37,19 @@ public class Cita {
     @Column(name = "observaciones")
     private String observaciones;
 
-    @Transient
+    @Column(name = "nombreMascota", insertable = false, updatable = false)
     private String nombreMascota;
     
-    @Transient
+    @Column(name = "nombreCliente", insertable = false, updatable = false)
     private String nombreCliente;
     
-    @Transient
+    @Column(name = "nombreVet", insertable = false, updatable = false)
     private String nombreVet;
     
-    @Transient
+    @Column(name = "tipoServicio", insertable = false, updatable = false)
     private String tipoServicio;
 
-    @Transient
+    @Column(name = "precio", insertable = false, updatable = false)
     private double precio;
 
 }

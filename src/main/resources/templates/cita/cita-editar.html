@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Registro de Cita</title>
+<link rel="stylesheet" th:href="@{/css/estilos-botones.css}" />
+<link rel="stylesheet" th:href="@{/css/estilos-generales.css}" />
+<link rel="stylesheet" th:href="@{/css/estilos-tabla.css}" />
+<link rel="stylesheet" th:href="@{/css/formulario.css}" />
+<style>
+label.error {
+    color: red;
+    font-size: 1rem;
+    display: block;
+    margin-top: 5px;
+}
+input.error, textarea.error, select.error {
+    border: 1px dashed red;
+    font-weight: 300;
+    color: red;
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("form[name='frmNuevo']").validate({
+        // Se actualizaron las reglas para que coincidan con los nombres generados por th:field
+        rules: {
+            idMascota: { required: true},
+            idVet: { required: true},
+            idTipoServicio: { required: true},
+            fechaCita: { required: true},
+            horaCita: { required: true},
+            motivo: { required: true, minlength: 5}
+        },
+        messages: {
+            idMascota: { required: "Seleccione una mascota" },
+            idVet: { required: "Seleccione un veterinario" },
+            idTipoServicio: { required: "Seleccione un tipo de servicio" },
+            fechaCita: { required: "Ingrese la fecha de la cita" },
+            horaCita: { required: "Ingrese la hora de la cita" },
+            motivo: {
+                required: "Ingrese el motivo de la cita",
+                minlength: "El motivo debe contener al menos 5 caracteres"
+            }
+        }
+    });
+});
+</script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3"></div>
+            <div class="col-lg-6 col-md-6 col-sm-6 cdr-formulario">
+                <h4>Formulario de Registro de Cita</h4>
+                <hr>
+                <form th:action="@{/citas/registrar}" th:object="${registro}" method="post" name="frmNuevo">
+                    <input type="hidden" th:field="*{idCita}" />
+                    <input type="hidden" th:field="*{estado}" />
+                    <div class="form-group row">
+                        <label for="idMascota" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Mascota</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <select th:field="*{idMascota}" style="width: 100%">
+                                <option value="">Seleccione una mascota</option>
+                                <option th:each="mascota : ${dataMascota}" 
+                                        th:value="${mascota.idMascota}" 
+                                        th:text="${mascota.nombreMascota + ' - ' + mascota.nombreDueno}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="idVet" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Veterinario</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <select th:field="*{idVet}" style="width: 100%">
+                                <option value="">Seleccione un veterinario</option>
+                                <option th:each="vet : ${dataVeterinario}" 
+                                        th:value="${vet.idVet}" 
+                                        th:text="${vet.nombreVet + ' - ' + vet.nomEspecialidad}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="idTipoServicio" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Tipo Servicio</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <select th:field="*{idTipoServicio}" style="width: 100%">
+                                <option value="">Seleccione un servicio</option>
+                                <option th:each="servicio : ${dataTipoServicio}" 
+                                        th:value="${servicio.idTipoServicio}" 
+                                        th:text="${servicio.descripcion + ' - S/. ' + servicio.precio}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="fechaCita" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Fecha</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <input type="date" th:field="*{fechaCita}" style="width: 100%">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="horaCita" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Hora</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <input type="time" th:field="*{horaCita}" style="width: 100%">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="motivo" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Motivo</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <textarea th:field="*{motivo}" rows="3" style="width: 100%"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="observaciones" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Observaciones</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <textarea th:field="*{observaciones}" rows="2" style="width: 100%"></textarea>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="form-group row">
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <input type="submit" class="btn btn-success" value="Registrar">
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <a th:href="@{/citas/lista}" class="btn btn-primary">Regresar</a>
+                        </div>
+                    </div>
+                </form>
+                <br>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3"></div>
+        </div>
+    </div>
+</body>
+</html>
