@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<link rel="stylesheet" th:href="@{/css/estilos-botones.css}" />
+<link rel="stylesheet" th:href="@{/css/estilos-generales.css}" />
+<link rel="stylesheet" th:href="@{/css/estilos-tabla.css}" />
+<link rel="stylesheet" th:href="@{/css/formulario.css}" />
+
+
+
+    <meta charset="UTF-8">
+    <title>Historial Clínico</title>
+</head>
+<body>
+<div class="container-fluid">
+    
+    <div class="row mb-3">
+        <div class="col-12 d-flex justify-content-between align-items-center">
+            <h3 class="mb-0">
+                Historial Clínico - Mascota ID: <span th:text="${idMascota}"></span>
+            </h3>
+            <a th:href="@{/ServletHistorial(type='listar')}"
+               class="crd-btn crd-btn-nuevo">
+                Nueva Búsqueda
+            </a>
+        </div>
+    </div>
+    
+    <div class="row mb-3">
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <h6 th:text="${cantReg + ' registros encontrados'}">0 registros encontrados</h6>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12">
+            <table class="table-minimal">
+                <thead>
+                    <tr>
+                        <th>Fecha Registro</th>
+                        <th>Fecha Cita</th>
+                        <th>Veterinario</th>
+                        <th>Servicio</th>
+                        <th>Diagnóstico</th>
+                        <th>Tratamiento</th>
+                        <th>Próxima Cita</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr th:if="${#lists.isEmpty(dataHistorial)}">
+                        <td colspan="8" class="text-center">
+                            <strong>No se encontraron registros en el historial clínico</strong>
+                        </td>
+                    </tr>
+
+                    <tr th:each="item : ${dataHistorial}">
+                        <td th:text="${item.fechaRegistro}"></td>
+                        <td>
+                            <span th:text="${item.proximaCita}"></span>
+                            <br>
+                            <small th:text="${item.horaCita}"></small>
+                        </td>
+                        <td th:text="${item.nombreVet}"></td>
+                        <td th:text="${item.tipoServicio}"></td>
+                        <td th:text="${item.diagnostico}"></td>
+                        <td th:text="${item.tratamiento}"></td>
+                        
+                        <td th:text="${item.proximaCita ?: 'No especificada'}"></td>
+                        
+                        <td class="text-center">
+                            <a th:href="@{/ServletHistorial(type='verDetalle', idHistorial=${item.idHistorial})}"
+                               class="crd-btn crd-btn-detalle">
+                                Ver Detalle
+                            </a>
+                        </td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

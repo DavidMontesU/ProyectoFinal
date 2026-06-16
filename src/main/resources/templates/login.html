@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Login - Clínica Veterinaria</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #81C784 0%, #4CAF50 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-container {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            max-width: 450px;
+            width: 100%;
+        }
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .login-header img {
+            width: 80px;
+            margin-bottom: 15px;
+        }
+        .login-header h3 {
+            color: #2E7D32;
+            font-weight: bold;
+        }
+        label.error {
+            color: red;
+            font-size: 0.9rem;
+            display: block;
+            margin-top: 5px;
+        }
+        input.error {
+            border: 1px dashed red;
+            color: red;
+        }
+        .btn-login {
+            background: #2E7D32;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            font-weight: bold;
+        }
+        .btn-login:hover {
+            background: #1B5E20;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("form[name='frmLogin']").validate({
+                rules: {
+                    txtUsername: { required: true, minlength: 4},
+                    txtClave: { required: true, minlength: 4}
+                },
+                messages: {
+                    txtUsername: {
+                        required: "Ingrese el username",
+                        minlength: "El username debe contener al menos 4 caracteres"
+                    },
+                    txtClave: {
+                        required: "Ingrese la clave",
+                        minlength: "La clave debe contener al menos 4 caracteres"
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="login-container">
+    <div class="login-header">
+        <div style="font-size: 4rem;">🐾</div>
+        <h3>Clínica Veterinaria PetCare</h3>
+        <p class="text-muted">Iniciar Sesión</p>
+    </div>
+    
+    <form th:action="@{/ServletUsuario}" method="post" name="frmLogin">
+        <input type="hidden" name="type" value="login"/>
+        
+        <div class="form-group mb-3">
+            <label class="form-label">👤 Usuario</label>
+            <input class="form-control" type="text" name="txtUsername" placeholder="Ingrese su usuario">
+        </div>
+        
+        <div class="form-group mb-4">
+            <label class="form-label">🔒 Contraseña</label>
+            <input class="form-control" type="password" name="txtClave" placeholder="Ingrese su contraseña">
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-login">
+            Iniciar Sesión
+        </button>
+    </form>
+    
+    <div class="text-center mt-3">
+        <small class="text-muted">Sistema de Gestión Veterinaria v1.0</small>
+    </div>
+</div>
+</body>
+</html>

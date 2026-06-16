@@ -11,7 +11,7 @@ public class Veterinario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idVet")
-    private int idVet;
+    private Integer idVet;
 
     @Column(name = "codVet", nullable = false, unique = true, length = 20)
     private String codVet;
@@ -19,9 +19,8 @@ public class Veterinario {
     @Column(name = "nombreVet", nullable = false, length = 100)
     private String nombreVet;
 
-    @ManyToOne
-    @JoinColumn(name = "codEsp")
-    private Especialidad especialidad;
+    @Column(name = "codEsp")
+    private String codEsp;
 
     @Column(name = "telefono", length = 15)
     private String telefono;

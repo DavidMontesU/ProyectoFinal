@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cliente</title>
+    
+    <link rel="stylesheet" th:href="@{/css/estilos-botones.css}" />
+<link rel="stylesheet" th:href="@{/css/estilos-generales.css}" />
+<link rel="stylesheet" th:href="@{/css/estilos-tabla.css}" />
+<link rel="stylesheet" th:href="@{/css/formulario.css}" />
+
+
+    <style>
+        label.error {
+            color: red;
+            font-size: 1rem;
+            display: block;
+            margin-top: 5px;
+        }
+        input.error, textarea.error {
+            border: 1px dashed red;
+            font-weight: 300;
+            color: red;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("form[name='frmNuevo']").validate({
+                rules: {
+                    txtDni: { required: true, minlength: 8, maxlength: 8},
+                    txtNombre: { required: true, minlength: 3},
+                    txtApellido: { required: true, minlength: 3},
+                    txtTelefono: { required: true, minlength: 7},
+                    txtDireccion: { required: true, minlength: 5},
+                    txtCorreo: { required: true, email: true}
+                },
+                messages: {
+                    txtDni: {
+                        required: "Ingrese DNI del cliente",
+                        minlength: "El DNI debe tener 8 dígitos",
+                        maxlength: "El DNI debe tener 8 dígitos"
+                    },
+                    txtNombre: {
+                        required: "Ingrese nombre del cliente",
+                        minlength: "El nombre debe contener al menos 3 caracteres"
+                    },
+                    txtApellido: {
+                        required: "Ingrese apellido del cliente",
+                        minlength: "El apellido debe contener al menos 3 caracteres"
+                    },
+                    txtTelefono: {
+                        required: "Ingrese telefono del cliente",
+                        minlength: "El telefono debe contener al menos 7 caracteres"
+                    },
+                    txtDireccion: {
+                        required: "Ingrese direccion del cliente",
+                        minlength: "La direccion debe contener al menos 5 caracteres"
+                    },
+                    txtCorreo: {
+                        required: "Ingrese correo del cliente",
+                        email: "Ingrese un correo válido"
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3"></div>
+            <div class="col-lg-6 col-md-6 col-sm-6 cdr-formulario">
+                <h4>Formulario de Registro de Cliente</h4>
+                <hr>
+                
+                <form th:action="@{/ServletCliente}" method="post" name="frmNuevo">
+                    <input type="hidden" name="type" value="registrar">
+                    
+                    <div class="form-group row">
+                        <label for="txtDni" class="col-lg-3 col-md-3 col-sm-3 col-form-label">DNI</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <input type="text" name="txtDni" id="txtDni" style="width: 100%">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="txtNombre" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Nombre</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <input type="text" name="txtNombre" id="txtNombre" style="width: 100%">
+                        </div>
+                    </div>
+                    
+                    <div class="form

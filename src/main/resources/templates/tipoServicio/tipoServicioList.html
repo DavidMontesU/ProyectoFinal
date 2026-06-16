@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tipo Servicio</title>
+    
+    <link rel="stylesheet" th:href="@{/css/estilos-botones.css}" />
+	<link rel="stylesheet" th:href="@{/css/estilos-generales.css}" />
+	<link rel="stylesheet" th:href="@{/css/estilos-tabla.css}" />
+	<link rel="stylesheet" th:href="@{/css/formulario.css}" />
+    
+</head>
+<body>
+    <div class="container-fluid">
+        
+        <div class="row">
+            <div class="col-12 mb-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3 class="mb-0">Listado de Tipos de Servicio</h3>
+                    <a th:href="@{/ServletTipoServicio(type='nuevo')}" class="crd-btn crd-btn-nuevo">Nuevo Tipo Servicio</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <h6 align="left" th:text="${cantReg + ' registros encontrados'}">0 registros encontrados</h6>
+            </div>
+        </div>
+        
+        <br/>
+        
+        <div class="row">
+            <div class="col-12">
+                <table class="table-minimal">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Descripción</th>
+                            <th>Precio</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item : ${dataTipoServicio}">
+                            <td th:text="${item.idTipoServicio}"></td>
+                            <td th:text="${item.descripcion}"></td>
+                            
+                            <td th:text="|S/. ${item.precio}|"></td>
+                            
+                            <td>
+                                <form th:action="@{/ServletTipoServicio}" method="get" style="display:inline;">
+                                    <input type="hidden" name="type" value="infoEdit">
+                                    <input type="hidden" name="id" th:value="${item.idTipoServicio}">
+                                    <button type="submit" class="crd-btn crd-btn-editar">Editar</button>
+                                </form>
+                                
+                                <form th:action="@{/ServletTipoServicio}" method="post" style="display:inline;"
+                                    onsubmit="return confirm('¿Seguro que deseas eliminar este servicio?');">
+                                    <input type="hidden" name="type" value="eliminar">
+                                    <input type="hidden" name="id" th:value="${item.idTipoServicio}">
+                                    <button type="submit" class="crd-btn crd-btn-eliminar">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

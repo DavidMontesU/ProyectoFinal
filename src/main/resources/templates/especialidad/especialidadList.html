@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<link rel="stylesheet" th:href="@{/css/estilos-botones.css}" />
+<link rel="stylesheet" th:href="@{/css/estilos-generales.css}" />
+<link rel="stylesheet" th:href="@{/css/estilos-tabla.css}" />
+<link rel="stylesheet" th:href="@{/css/formulario.css}" />
+
+
+    <meta charset="UTF-8">
+    <title>Especialidad</title>
+</head>
+<body>
+    <div class="container-fluid">
+        
+        <div class="row">
+            <div class="col-12 mb-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3 class="mb-0">Listado de Especialidades</h3>
+                    <a th:href="@{/ServletEspecialidad(type='nuevo')}" class="crd-btn crd-btn-nuevo">Nueva Especialidad</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <h6 align="left" th:text="${cantReg + ' registros encontrados'}">0 registros encontrados</h6>
+            </div>
+        </div>
+ 
+        <br/>
+        
+        <div class="row">
+            <div class="col-12">
+                <table class="table-minimal">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Descripción</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item : ${dataEspecialidad}">
+                            <td th:text="${item.codEsp}"></td>
+                            <td th:text="${item.descripcion}"></td>
+                            <td>
+                                <form th:action="@{/ServletEspecialidad}" method="get" style="display:inline;">
+                                    <input type="hidden" name="type" value="infoEdit">
+                                    <input type="hidden" name="codEsp" th:value="${item.codEsp}">
+                                    <button type="submit" class="crd-btn crd-btn-editar">Editar</button>
+                                </form>
+                                
+                                <form th:action="@{/ServletEspecialidad}" method="post" style="display:inline;"
+                                    onsubmit="return confirm('¿Seguro que deseas eliminar esta especialidad?');">
+                                    <input type="hidden" name="type" value="eliminar">
+                                    <input type="hidden" name="cod" th:value="${item.codEsp}">
+                                    <button type="submit" class="crd-btn crd-btn-eliminar">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

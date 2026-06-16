@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Veterinario</title>
+    
+    <link rel="stylesheet" th:href="@{/css/estilos-botones.css}" />
+<link rel="stylesheet" th:href="@{/css/estilos-generales.css}" />
+<link rel="stylesheet" th:href="@{/css/estilos-tabla.css}" />
+<link rel="stylesheet" th:href="@{/css/formulario.css}" />
+
+
+</head>
+<body>
+    <div class="container-fluid">
+        
+        <div class="row">
+            <div class="col-12 mb-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3 class="mb-0">Listado de Veterinarios</h3>
+                    <a th:href="@{/veterinarios/nuevo}" class="crd-btn crd-btn-nuevo">Nuevo Veterinario</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <h6 align="left" th:text="${cantReg + ' registros encontrados'}">0 registros encontrados</h6>
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-7">
+                <form th:action="@{/ServletVeterinario}" method="post">
+                    <label>Escribir nombre: </label>
+                    <input type="hidden" name="type" value="buscar">
+                    <input type="text" class="" name="txtBuscar">
+                    <input type="submit" value="Buscar">
+                </form>
+            </div>
+        </div>
+ 
+        <br/>
+        
+        <div class="row">
+            <div class="col-12">
+                <input type="hidden" name="type" value="listar">
+                <table class="table-minimal">
+                    <thead>
+                        <tr>
+                            <th>Id-Veterinario</th>
+                            <th>Cod-Veterinario</th>
+                            <th>Nombre</th>
+                            <th>Nom-Especialidad</th>
+                            <th>Teléfono</th>
+                            <th>Edad</th>
+                            <th>Correo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item : ${dataVeterinarios}">
+                            <td th:text="${item.idVet}"></td>
+                            <td th:text="${item.codVet}"></td>
+                            <td th:text="${item.nombreVet}"></td>
+                            <td th:text="${item.nomEspecialidad}"></td>
+                            <td th:text="${item.telefono}"></td>
+                            <td th:text="${item.edad}"></td>
+                            <td th:text="${item.correo}"></td>
+                            <td>
+                                <form th:action="@{/ServletVeterinario}" method="get" style="display:inline;">
+                                    <input type="hidden" name="type" value="info">
+                                    <input type="hidden" name="id" th:value="${item.idVet}">
+                                    <button type="submit" class="crd-btn crd-btn-detalle">Ver Detalle</button>
+                                </form>
+                                
+                                <form th:action="@{/veterinarios/infoEdit/{id}(id=${item.idVet})}" method="get" style="display:inline;">
+                                    <input type="hidden" name="type" value="infoEdit">
+                                    <input type="hidden" name="id" th:value="${item.idVet}">
+                                    <button type="submit" class="crd-btn crd-btn-editar">Editar</button>
+                                </form>
+                                
+                                <form th:action="@{/ServletVeterinario}" method="post" style="display:inline;"
+                                    onsubmit="return confirm('¿Seguro que deseas eliminar este veterinario?');">
+                                    <input type="hidden" name="type" value="eliminar">
+                                    <input type="hidden" name="id" th:value="${item.idVet}">
+                                    <button type="submit" class="crd-btn crd-btn-eliminar">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

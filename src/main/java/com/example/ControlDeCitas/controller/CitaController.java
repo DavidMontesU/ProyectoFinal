@@ -52,7 +52,7 @@ public class CitaController {
 	public String nuevo(Model model) {
 		model.addAttribute("registro", new Cita());
 		model.addAttribute("dataMascota", mascotaService.listarTodos());
-		model.addAttribute("dataTipoServicio", tipoServicioService.listarTodos());
+		model.addAttribute("dataTipoServicio", tipoServicioService.listarTiposServicios());
 		model.addAttribute("dataVeterinario", veterinarioService.listarTodos());
 		model.addAttribute("titulo", "Registrar nueva cita");
 		return "cita/cita-editar";
@@ -84,7 +84,7 @@ public class CitaController {
 		Cita cita = citaService.obtenerCita(id);
 		model.addAttribute("registro", cita);
 		model.addAttribute("dataMascota", mascotaService.listarTodos());
-		model.addAttribute("dataTipoServicio", tipoServicioService.listarTodos());
+		model.addAttribute("dataTipoServicio", tipoServicioService.listarTiposServicios());
 		model.addAttribute("dataVeterinario", veterinarioService.listarTodos());
 		return "cita/cita-editar";
 	}

@@ -11,7 +11,7 @@ public class HistorialClinico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idHistorial")
-    private int idHistorial;
+    private Integer idHistorial;
 
     @Column(name = "diagnostico", nullable = false, length = 500)
     private String diagnostico;
@@ -28,8 +28,22 @@ public class HistorialClinico {
     @Column(name = "fechaRegistro")
     private String fechaRegistro;
 
-    @ManyToOne
-    @JoinColumn(name = "idCita")
-    private Cita cita;
+    @Column(name = "idCita")
+    private Integer idCita;
 
+    
+    @Column(name = "fechaCita", insertable = false, updatable = false)
+    private String fechaCita;
+    
+    @Column(name = "horaCita", insertable = false, updatable = false)
+    private String horaCita;
+    
+    @Column(name = "motivo", insertable = false, updatable = false)
+    private String motivo;
+    
+    @Column(name = "nombreVet", insertable = false, updatable = false)
+    private String nombreVet;
+    
+    @Column(name = "tipoServicio", insertable = false, updatable = false)
+    private String tipoServicio;
 }

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de Veterinario</title>
+</head>
+<body>
+
+<div class="container" style="margin-top:30px; margin-bottom:100px;">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+
+            <div class="cdr-formulario">
+
+                <h3>Detalle de Veterinario</h3>
+                <hr>
+
+                <p><strong>Código:</strong> <span th:text="${dataVeterinario?.codVet}"></span></p>
+                <p><strong>Nombre:</strong> <span th:text="${dataVeterinario?.nombreVet}"></span></p>
+                <p><strong>Especialidad:</strong> <span th:text="${dataVeterinario?.nomEspecialidad}"></span></p>
+                <p><strong>Teléfono:</strong> <span th:text="${dataVeterinario?.telefono}"></span></p>
+                
+                <p><strong>Edad:</strong> <span th:text="${dataVeterinario?.edad + ' años'}"></span></p>
+                
+                <p><strong>Correo:</strong> <span th:text="${dataVeterinario?.correo}"></span></p>
+
+                <hr>
+
+                <div class="d-flex justify-content-end">
+                    <a href="javascript:history.back()" class="crd-btn crd-btn-nuevo">
+                        Regresar
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

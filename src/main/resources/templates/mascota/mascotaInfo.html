@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de Mascota</title>
+</head>
+<body>
+
+<div class="container" style="margin-top:30px; margin-bottom:100px;">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="cdr-formulario">
+                
+                <h3>Detalle de Mascota</h3>
+                <hr>
+                
+                <p><strong>ID Mascota:</strong> <span th:text="${dataMascota?.idMascota}"></span></p>
+                <p><strong>Nombre:</strong> <span th:text="${dataMascota?.nombreMascota}"></span></p>
+                <p><strong>Especie:</strong> <span th:text="${dataMascota?.nombreEspecie}"></span></p>
+                <p><strong>Raza:</strong> <span th:text="${dataMascota?.raza}"></span></p>
+                
+                <p><strong>Edad:</strong> <span th:text="${dataMascota?.edad + ' años'}"></span></p>
+                <p><strong>Peso:</strong> <span th:text="${dataMascota?.peso + ' kg'}"></span></p>
+                <p><strong>Dueño:</strong> <span th:text="${dataMascota?.nombreDueno}"></span></p>
+                
+                <hr>
+                
+                <p><strong>Observaciones:</strong></p>
+                <p style="margin-left:15px;" th:text="${dataMascota?.observaciones ?: 'Sin observaciones'}"></p>
+                
+                <hr>
+                
+                <div class="d-flex justify-content-between">
+                    <form th:action="@{/ServletHistorial}" method="post">
+                        <input type="hidden" name="type" value="verHistorial">
+                        <input type="hidden" name="idMascota" th:value="${dataMascota?.idMascota}">
+                        <button type="submit" class="crd-btn crd-btn-nuevo">
+                            📋 Ver Historial Clínico
+                        </button>
+                    </form>
+                 
+                   <a href="javascript:history.back()" class="crd-btn crd-btn-nuevo">
+                        Regresar
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

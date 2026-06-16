@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mascota</title>
+    <style>
+        label.error {
+            color: red;
+            font-size: 1rem;
+            display: block;
+            margin-top: 5px;
+        }
+        input.error, textarea.error, select.error {
+            border: 1px dashed red;
+            font-weight: 300;
+            color: red;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("form[name='frmNuevo']").validate({
+                rules: {
+                    txtNombre: { required: true, minlength: 2},
+                    cboEspecie: { required: true},
+                    txtRaza: { required: true, minlength: 2},
+                    txtEdad: { required: true, min: 0},
+                    txtPeso: { required: true, min: 0},
+                    cboCliente: { required: true}
+                },
+                messages: {
+                    txtNombre: {
+                        required: "Ingrese nombre de la mascota",
+                        minlength: "El nombre debe contener al menos 2 caracteres"
+                    },
+                    cboEspecie: {
+                        required: "Seleccione una especie"
+                    },
+                    txtRaza: {
+                        required: "Ingrese la raza",
+                        minlength: "La raza debe contener al menos 2 caracteres"
+                    },
+                    txtEdad: {
+                        required: "Ingrese la edad",
+                        min: "La edad no puede ser negativa"
+                    },
+                    txtPeso: {
+                        required: "Ingrese el peso",
+                        min: "El peso no puede ser negativo"
+                    },
+                    cboCliente: {
+                        required: "Seleccione un dueño"
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3"></div>
+            <div class="col-lg-6 col-md-6 col-sm-6 cdr-formulario">
+                <h4>Formulario de Registro de Mascota</h4>
+                <hr>
+                
+                <form th:action="@{/ServletMascota}" method="post" name="frmNuevo">
+                    <input type="hidden" name="type" value="registrar">
+                    
+                    <div class="form-group row">
+                        <label for="txtNombre" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Nombre Mascota</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <input type="text" name="txtNombre" id="txtNombre" style="width: 100%">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="cboEspecie" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Especie</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <select name="cboEspecie" id="cboEspecie" style="width: 100%">
+                                <option value="">Seleccione una especie</option>
+                                
+                                <option th:each="item : ${dataEspecie}" 
+                                        th:value="${item.idEspecie}" 
+                                        th:text="${item.nombreEspecie}">
+                                </option>
+                                
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="txtRaza" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Raza</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <input type="text" name="txtRaza" id="txtRaza" style="width: 100%">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="txtEdad" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Edad (años)</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <input type="number" name="txtEdad" id="txtEdad" style="width: 100%">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="txtPeso" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Peso (kg)</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <input type="number" step="0.01" name="txtPeso" id="txtPeso" style="width: 100%">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="cboCliente" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Dueño</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <select name="cboCliente" id="cboCliente" style="width: 100%">
+                                <option value="">Seleccione un dueño</option>
+                                
+                                <option th:each="item : ${dataCliente}" 
+                                        th:value="${item.idCliente}" 
+                                        th:text="${item.nombreCliente + ' ' + item.apellidoCliente}">
+                                </option>
+                                
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="txtObservaciones" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Observaciones</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <textarea name="txtObservaciones" id="txtObservaciones" rows="3" style="width: 100%"></textarea>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="form-group row">
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <input type="submit" class="btn btn-success" value="Registrar">
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <a th:href="@{/ServletMascota(type='listar')}" class="btn btn-primary">Regresar</a>
+                        </div>
+                    </div>
+                </form>
+                <br>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3"></div>
+        </div>
+    </div>
+</body>
+</html>

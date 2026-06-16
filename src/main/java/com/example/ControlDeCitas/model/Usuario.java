@@ -11,7 +11,7 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idUsuario")
-    private int idUsuario;
+    private Integer idUsuario;
 
     @Column(name = "username", nullable = false, unique = true, length = 50)
     private String username;
@@ -19,8 +19,10 @@ public class Usuario {
     @Column(name = "clave", nullable = false, length = 255)
     private String clave;
 
-    @ManyToOne
-    @JoinColumn(name = "idTipo")
-    private TipoUsuario tipoUsuario;
+    @Column(name = "idTipo")
+    private Integer idTipo;
+    
+    @Column(name = "tipoUsuario", insertable = false, updatable = false)
+    private String tipoUsuario;
 
 }

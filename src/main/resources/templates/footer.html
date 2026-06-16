@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<footer th:fragment="footer" style="background:#2E7D32; color:#fff; text-align:center; padding:15px; width:100%; margin-top:40px;">
+    <div class="container">
+        <p style="margin:0;">
+            <strong>🐾 Clínica Veterinaria PetCare</strong>
+        </p>
+        <p style="margin:0; font-size:0.9rem;">
+            Cuidando a tus mejores amigos | Lima - Perú
+        </p>
+        <p style="margin:0; font-size:0.8rem;">
+            © <span th:text="${#dates.year(#dates.createNow())}">2025</span> - Todos los derechos reservados
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>

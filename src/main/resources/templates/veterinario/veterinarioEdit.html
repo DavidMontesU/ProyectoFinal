@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Veterinario</title>
+    
+    <link rel="stylesheet" th:href="@{/css/estilos-botones.css}" />
+<link rel="stylesheet" th:href="@{/css/estilos-generales.css}" />
+<link rel="stylesheet" th:href="@{/css/estilos-tabla.css}" />
+<link rel="stylesheet" th:href="@{/css/formulario.css}" />
+
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-3"></div>
+        <div class="col-lg-6 col-md-6 col-sm-6 cdr-formulario">
+            <h4>Formulario de Actualización de Veterinario</h4>
+            <hr>
+            
+            <form th:action="@{/veterinarios/registrar}" th:object="${registro}" method="post">
+                
+                <input type="hidden" name="idVeterinario" th:field="*{idVet}" >
+                
+                <div class="form-group row">
+                    <label class="col-lg-3 col-md-3 col-sm-3 col-form-label">Código</label>
+                    <div class="col-lg-9 col-md-9 col-sm-9">
+                        <input type="text" name="txtCodVet" th:field="*{codVet}" style="width: 100%">
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <label class="col-lg-3 col-md-3 col-sm-3 col-form-label">Nombre</label>
+                    <div class="col-lg-9 col-md-9 col-sm-9">
+                        <input type="text" name="txtNombre" th:field="*{nombreVet}"  style="width: 100%">
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <label class="col-lg-3 col-md-3 col-sm-3 col-form-label">Especialidad</label>
+                    <div class="col-lg-9 col-md-9 col-sm-9">
+                        <select th:field="*{codEsp}" name="cboEspecialidad" style="width: 100%">
+                            <option value="">Seleccione una especialidad</option>
+                            <option th:each="item : ${dataEspecialidad}" 
+                                    th:value="${item.codEsp}" 
+                                    th:text="${item.descripcion}"
+                                    >
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <label class="col-lg-3 col-md-3 col-sm-3 col-form-label">Teléfono</label>
+                    <div class="col-lg-9 col-md-9 col-sm-9">
+                        <input type="text" name="txtTelefono" th:field="*{telefono}" style="width: 100%">
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <label class="col-lg-3 col-md-3 col-sm-3 col-form-label">Edad</label>
+                    <div class="col-lg-9 col-md-9 col-sm-9">
+                        <input type="text" name="txtEdad" th:field="*{edad}" style="width: 100%">
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <label class="col-lg-3 col-md-3 col-sm-3 col-form-label">Correo</label>
+                    <div class="col-lg-9 col-md-9 col-sm-9">
+                        <input type="text" name="txtCorreo" th:field="*{correo}" style="width: 100%">
+                    </div>
+                </div><br>
+                
+                <div class="col-6 col-sm-7">
+                    <input type="submit" class="btn btn-primary" value="Editar veterinario">
+                    <a th:href="@{/veterinarios/lista}" class="btn btn-primary">Regresar</a>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+</div>
+</body>
+</html>

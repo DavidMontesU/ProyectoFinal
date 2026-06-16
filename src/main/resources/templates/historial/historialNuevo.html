@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Historial Clínico</title>
+    <style>
+        label.error {
+            color: red;
+            font-size: 1rem;
+            display: block;
+            margin-top: 5px;
+        }
+        input.error, textarea.error {
+            border: 1px dashed red;
+            font-weight: 300;
+            color: red;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("form[name='frmNuevo']").validate({
+                rules: {
+                    txtDiagnostico: { required: true, minlength: 10},
+                    txtTratamiento: { required: true, minlength: 10}
+                },
+                messages: {
+                    txtDiagnostico: {
+                        required: "Ingrese el diagnostico",
+                        minlength: "El diagnostico debe contener al menos 10 caracteres"
+                    },
+                    txtTratamiento: {
+                        required: "Ingrese el tratamiento",
+                        minlength: "El tratamiento debe contener al menos 10 caracteres"
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2"></div>
+            <div class="col-lg-8 col-md-8 col-sm-8 cdr-formulario">
+                <h4>Formulario de Registro de Historial Clínico</h4>
+                <hr>
+                
+                <form th:action="@{/ServletHistorial}" method="post" name="frmNuevo">
+                    <input type="hidden" name="type" value="registrar">
+                    
+                    <input type="hidden" name="idCita" th:value="${idCita}">
+                    
+                    <div class="alert alert-info">
+                        <strong>Cita ID:</strong> <span th:text="${idCita}"></span>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="txtDiagnostico" class="col-lg-2 col-md-2 col-sm-2 col-form-label">Diagnóstico</label>
+                        <div class="col-lg-10 col-md-10 col-sm-10">
+                            <textarea name="txtDiagnostico" id="txtDiagnostico" rows="4" 
+                                      style="width: 100%" placeholder="Ingrese el diagnostico detallado"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="txtTratamiento" class="col-lg-2 col-md-2 col-sm-2 col-form-label">Tratamiento</label>
+                        <div class="col-lg-10 col-md-10 col-sm-10">
+                            <textarea name="txtTratamiento" id="txtTratamiento" rows="4" 
+                                      style="width: 100%" placeholder="Ingrese el tratamiento indicado"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="txtReceta" class="col-lg-2 col-md-2 col-sm-2 col-form-label">Receta</label>
+                        <div class="col-lg-10 col-md-10 col-sm-10">
+                            <textarea name="txtReceta" id="txtReceta" rows="3" 
+                                      style="width: 100%" placeholder="Ingrese la receta medica"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="txtProximaCita" class="col-lg-2 col-md-2 col-sm-2 col-form-label">Próxima Cita</label>
+                        <div class="col-lg-10 col-md-10 col-sm-10">
+                            <input type="date" name="txtProximaCita" id="txtProximaCita" style="width: 100%">
+                            <small class="form-text text-muted">Opcional - Fecha de la proxima cita de control</small>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="form-group row">
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <input type="submit" class="btn btn-success" value="Registrar Historial">
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <a th:href="@{/ServletCita(type='listar')}" class="btn btn-primary">Regresar a Citas</a>
+                        </div>
+                    </div>
+                </form>
+                <br>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        </div>
+    </div>
+</body>
+</html>

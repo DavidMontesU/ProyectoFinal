@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mascota</title>
+</head>
+<body>
+    <div class="container-fluid">
+        
+        <div class="row">
+            <div class="col-12 mb-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3 class="mb-0">Listado de Mascotas</h3>
+                    <a th:href="@{/ServletMascota(type='nuevo')}" class="crd-btn crd-btn-nuevo">Nueva Mascota</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <h6 align="left" th:text="${cantReg + ' registros encontrados'}">0 registros encontrados</h6>
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-7">
+                <form th:action="@{/ServletMascota}" method="post">
+                    <label>Buscar por nombre: </label>
+                    <input type="hidden" name="type" value="buscar">
+                    <input type="text" class="" name="txtBuscar">
+                    <input type="submit" value="Buscar">
+                </form>
+            </div>
+        </div>
+ 
+        <br/>
+        
+        <div class="row">
+            <div class="col-12">
+                <table class="table-minimal">
+                    <thead>
+                        <tr>
+                            <th>Id-Mascota</th>
+                            <th>Nombre</th>
+                            <th>Especie</th>
+                            <th>Raza</th>
+                            <th>Edad</th>
+                            <th>Peso</th>
+                            <th>Dueño</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item : ${dataMascota}">
+                            <td th:text="${item.idMascota}"></td>
+                            <td th:text="${item.nombreMascota}"></td>
+                            <td th:text="${item.nombreEspecie}"></td>
+                            <td th:text="${item.raza}"></td>
+                            <td th:text="${item.edad}"></td>
+                            <td th:text="${item.peso}"></td>
+                            <td th:text="${item.nombreDueno}"></td>
+                            <td>
+                                <form th:action="@{/ServletMascota}" method="get" style="display:inline;">
+                                    <input type="hidden" name="type" value="info">
+                                    <input type="hidden" name="id" th:value="${item.idMascota}">
+                                    <button type="submit" class="crd-btn crd-btn-detalle">Ver Detalle</button>
+                                </form>
+                                
+                                <form th:action="@{/ServletHistorial}" method="post" style="display:inline;">
+                                    <input type="hidden" name="type" value="verHistorial">
+                                    <input type="hidden" name="idMascota" th:value="${item.idMascota}">
+                                    <button type="submit" class="btn btn-success" 
+                                            style="font-size:12px; padding:8px 12px; border-radius:5px;">
+                                        📋 Historial
+                                    </button>
+                                </form>
+                                
+                                <form th:action="@{/ServletMascota}" method="get" style="display:inline;">
+                                    <input type="hidden" name="type" value="infoEdit">
+                                    <input type="hidden" name="id" th:value="${item.idMascota}">
+                                    <button type="submit" class="crd-btn crd-btn-editar">Editar</button>
+                                </form>
+                                
+                                <form th:action="@{/ServletMascota}" method="post" style="display:inline;"
+                                    onsubmit="return confirm('¿Seguro que deseas eliminar esta mascota?');">
+                                    <input type="hidden" name="type" value="eliminar">
+                                    <input type="hidden" name="id" th:value="${item.idMascota}">
+                                    <button type="submit" class="crd-btn crd-btn-eliminar">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

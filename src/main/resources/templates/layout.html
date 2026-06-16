@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Clínica Veterinaria - Sistema</title>
+    
+    <link rel="stylesheet" type="text/css" th:href="@{/css/estilos-generales.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/estilos-botones.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/estilos-tabla.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/formulario.css}">
+</head>
+<body>
+<div class="page-wrapper">
+
+    <div th:replace="~{menu :: menu}"></div>
+    
+    <br>
+    
+    <div class="container-fluid page-content">
+        <div th:replace="~{__${content}__}"></div>
+    </div>
+    
+    <div th:replace="~{footer :: footer}"></div>
+
+</div>
+</body>
+</html>

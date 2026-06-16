@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Clínica Veterinaria - Home</title>
+    <style>
+        .welcome-section {
+            background: linear-gradient(135deg, #81C784 0%, #4CAF50 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 20px auto;
+            max-width: 900px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .stats-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+        .stats-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body style="background-color: #E8F5E9;">
+
+<div th:replace="~{menu :: menu}"></div>
+
+<br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="welcomeSection" class="welcome-section" 
+                 style="outline:none; user-select:none; -webkit-user-select:none; -moz-user-select:none; cursor:default;"
+                 onmousedown="return false;"
+                 onselectstart="return false;">
+                
+                <h1>
+                    🐾 Bienvenido
+                    <span th:text="${session.usuario?.username ?: 'a la Clínica Veterinaria PetCare'}"></span>
+                </h1>
+                
+                <p style="font-size: 1.2rem; margin-top: 20px;">
+                    Sistema de Gestión de Citas y Atención Veterinaria
+                </p>
+                <p style="font-size: 1rem; margin-top: 10px;">
+                    "Cuidamos la salud de tus mejores amigos con amor y profesionalismo"
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row justify-content-center" style="margin-bottom: 100px;">
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <a th:href="@{/ServletMascota(type='listar')}" style="text-decoration:none; color:inherit; outline:none;">
+                <div class="stats-card text-center">
+                    <div class="stats-icon">🐕</div>
+                    <h4>Mascotas</h4>
+                    <p>Registro completo de pacientes</p>
+                </div>
+            </a>
+        </div>
+        
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <a th:href="@{/ServletCita(type='listar')}" style="text-decoration:none; color:inherit; outline:none;">
+                <div class="stats-card text-center">
+                    <div class="stats-icon">📅</div>
+                    <h4>Citas</h4>
+                    <p>Control de atenciones diarias</p>
+                </div>
+            </a>
+        </div>
+        
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <a th:href="@{/ServletVeterinario(type='listar')}" style="text-decoration:none; color:inherit; outline:none;">
+                <div class="stats-card text-center">
+                    <div class="stats-icon">👨‍⚕️</div>
+                    <h4>Veterinarios</h4>
+                    <p>Personal especializado</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{footer :: footer}"></div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const welcome = document.getElementById("welcomeSection");
+        if (welcome) {
+            welcome.addEventListener("mousedown", function (e) {
+                e.preventDefault();
+            });
+            welcome.addEventListener("selectstart", function (e) {
+                e.preventDefault();
+            });
+        }
+    });
+</script>
+
+</body>
+</html>

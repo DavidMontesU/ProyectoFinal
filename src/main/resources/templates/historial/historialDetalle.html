@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle del Historial Clínico</title>
+</head>
+<body>
+
+<div class="container-fluid d-flex justify-content-center mt-4">
+    <div class="cdr-formulario" style="max-width: 900px; width: 100%;">
+        
+        <h4>Detalle del Historial Clínico</h4>
+        <hr>
+        
+        <div class="mb-3">
+            <p><strong>Veterinario:</strong> <span th:text="${historial?.nombreVet}"></span></p>
+            <p><strong>Servicio:</strong> <span th:text="${historial?.tipoServicio}"></span></p>
+            <p><strong>Fecha Registro:</strong> <span th:text="${historial?.fechaRegistro}"></span></p>
+        </div>
+        
+        <hr>
+        
+        <div class="mb-3">
+            <label><strong>Diagnóstico</strong></label>
+            <p class="mt-2" th:text="${historial?.diagnostico}"></p>
+        </div>
+        
+        <div class="mb-3">
+            <label><strong>Tratamiento</strong></label>
+            <p class="mt-2" th:text="${historial?.tratamiento}"></p>
+        </div>
+        
+        <div class="mb-3">
+            <label><strong>Receta</strong></label>
+            <p class="mt-2" th:text="${historial?.receta}"></p>
+        </div>
+        
+        <div class="mb-3">
+            <label><strong>Próxima Cita</strong></label>
+            <p class="mt-2" th:text="${historial?.proximaCita}"></p>
+        </div>
+        
+        <hr>
+        
+        <div class="d-flex justify-content-end">
+            <button type="button"
+                    class="crd-btn crd-btn-nuevo"
+                    onclick="history.back();">
+                Regresar
+            </button>
+        </div>
+        
+    </div>
+</div>
+
+</body>
+</html>

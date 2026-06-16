@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Veterinario</title>
+    
+    <link rel="stylesheet" th:href="@{/css/estilos-botones.css}" />
+<link rel="stylesheet" th:href="@{/css/estilos-generales.css}" />
+<link rel="stylesheet" th:href="@{/css/estilos-tabla.css}" />
+<link rel="stylesheet" th:href="@{/css/formulario.css}" />
+
+
+    
+    <style>
+        label.error {
+            color: red;
+            font-size: 1rem;
+            display: block;
+            margin-top: 5px;
+        }
+        input.error, textarea.error {
+            border: 1px dashed red;
+            font-weight: 300;
+            color: red;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("form[name='frmNuevo']").validate({
+                rules: {
+                    txtCodVet: { required: true, minlength: 3, maxlength: 5},
+                    txtNombre: { required: true, minlength: 3},
+                    cboEspecialidad: { required: true},
+                    txtTelefono: { required: true, minlength: 7},
+                    txtEdad: { required: true, minlength: 1},
+                    txtCorreo: { required: true, minlength: 10}
+                },
+                messages: {
+                    txtCodVet: {
+                        required: "Ingrese codigo para el veterinario",
+                        minlength: "El codigo del veterinario debe contener al menos 3 caracteres y como máximo 5 caracteres"
+                    },
+                    txtNombre: {
+                        required: "Ingrese nombre para el veterinario",
+                        minlength: "El nombre del veterinario debe contener al menos 3 caracteres"
+                    },
+                    cboEspecialidad: {
+                        required: "Ingrese especialidad para el veterinario"
+                    },
+                    txtTelefono: {
+                        required: "Ingrese telefono para el veterinario",
+                        minlength: "El telefono del veterinario debe contener al menos 7 caracteres"
+                    },
+                    txtEdad: {
+                        required: "Ingrese edad para el veterinario",
+                        minlength: "La edad del veterinario debe contener al menos 1 caracter"
+                    },
+                    txtCorreo: {
+                        required: "Ingrese correo para el veterinario",
+                        minlength: "El correo del veterinario debe contener al menos 10 caracteres"
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3"></div>
+            <div class="col-lg-6 col-md-6 col-sm-6 cdr-formulario">
+                <h4>Formulario de Registro de Veterinario</h4>
+                <hr>
+                
+                <form th:action="@{/veterinarios/registrar}" th:object="${registro}" method="post" name="frmNuevo">
+                    <input type="hidden" name="type" value="registrar">
+                    
+                    <div class="form-group row">
+                        <label for="txtCodVet" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Codigo Veterinario</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <input type="text" th:field="*{codVet}" name="txtCodVet" id="txtCodVet" style="width: 100%">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="txtNombre" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Nombre Veterinario</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <input type="text" th:field="*{nombreVet}" name="txtNombre" id="txtNombre" style="width: 100%">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="cboEspecialidad" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Especialidad</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <select th:field="*{codEsp}" name="cboEspecialidad" id="cboEspecialidad" style="width: 100%">
+                                <option value="">Seleccione una especialidad</option>
+                                
+                                <option th:each="item : ${dataEspecialidad}" 
+                                        th:value="${item.codEsp}" 
+                                        th:text="${item.descripcion}">
+                                </option>
+                                
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="txtTelefono" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Telefono</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <input type="text" th:field="*{telefono}" name="txtTelefono" id="txtTelefono" style="width: 100%">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="txtEdad" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Edad</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <input type="number" th:field="*{edad}"  name="txtEdad" id="txtEdad" style="width: 100%">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="txtCorreo" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Correo</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <input type="text" th:field="*{correo}" name="txtCorreo" id="txtCorreo" style="width: 100%">
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="form-group row">
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <input type="submit" class="btn btn-success" value="Registrar">
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <a th:href="@{/veterinarios/lista}"class="btn btn-primary">Regresar</a>
+                        </div>
+                    </div>
+                </form>
+                <br>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3"></div>
+        </div>
+    </div>
+</body>
+</html>

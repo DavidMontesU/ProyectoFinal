@@ -28,13 +28,11 @@ public class Mascota {
     @Column(name = "observaciones", length = 500)
     private String observaciones;
 
-    @ManyToOne
-    @JoinColumn(name = "idEspecie")
-    private Especie especie;
+    @Column(name = "idEspecie")
+    private Integer idEspecie;
 
-    @ManyToOne
-    @JoinColumn(name = "idCliente")
-    private Cliente cliente;
+    @Column(name = "idCliente")
+    private Integer idCliente;
     
     @Column(name = "nombreEspecie", insertable = false, updatable = false)
     private String nombreEspecie;
