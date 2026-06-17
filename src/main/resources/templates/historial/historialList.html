@@ -20,7 +20,7 @@
             <h3 class="mb-0">
                 Historial Clínico - Mascota ID: <span th:text="${idMascota}"></span>
             </h3>
-            <a th:href="@{/ServletHistorial(type='listar')}"
+            <a th:href="@{/historial/lista/{id}(id=${idMascota})}"
                class="crd-btn crd-btn-nuevo">
                 Nueva Búsqueda
             </a>
@@ -71,7 +71,7 @@
                         <td th:text="${item.proximaCita ?: 'No especificada'}"></td>
                         
                         <td class="text-center">
-                            <a th:href="@{/ServletHistorial(type='verDetalle', idHistorial=${item.idHistorial})}"
+                            <a th:href="@{/historial/detalle/{id}(id=${item.idHistorial})}"
                                class="crd-btn crd-btn-detalle">
                                 Ver Detalle
                             </a>

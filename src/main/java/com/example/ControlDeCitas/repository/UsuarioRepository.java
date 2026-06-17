@@ -26,7 +26,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
     @Transactional
     @Query(value = "CALL sp_eliminarUsuario(:idUsuario)", nativeQuery = true)
     void eliminarUsuario(
-        @Param("idUsuario") Long idUsuario
+        @Param("idUsuario") Integer idUsuario
     );
 	
 	
@@ -37,13 +37,13 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
         @Param("username") String username, 
         @Param("clave") String clave, 
         @Param("idTipo") Integer idTipo,
-        @Param("idUsuario") Long idUsuario
+        @Param("idUsuario") Integer idUsuario
     );
 	
 	
 	@Query(value = "CALL sp_obtenerUsuarioPorId(:idUsuario)", nativeQuery = true)
     Optional<Usuario> obtenerUsuarioPorId(
-        @Param("idUsuario") Long idUsuario
+        @Param("idUsuario") Integer idUsuario
     );
 	
 	

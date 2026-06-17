@@ -37,7 +37,7 @@ public class UsuarioService {
     /**
      * Busca un usuario específico por su ID.
      */
-    public Optional<Usuario> obtenerUsuarioPorId(Long idUsuario) {
+    public Optional<Usuario> obtenerUsuarioPorId(Integer idUsuario) {
         return usuarioRepository.obtenerUsuarioPorId(idUsuario);
     }
 
@@ -51,14 +51,14 @@ public class UsuarioService {
     /**
      * Actualiza los datos de un usuario existente.
      */
-    public void actualizarUsuario(String username, String clave, Integer idTipo, Long idUsuario) {
+    public void actualizarUsuario(String username, String clave, Integer idTipo, Integer idUsuario) {
         usuarioRepository.actualizarUsuario(username, clave, idTipo, idUsuario);
     }
 
     /**
      * Elimina un usuario del sistema mediante su ID.
      */
-    public void eliminarUsuario(Long idUsuario) {
+    public void eliminarUsuario(Integer idUsuario) {
         usuarioRepository.eliminarUsuario(idUsuario);
     }
 	

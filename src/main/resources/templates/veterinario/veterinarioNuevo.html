@@ -30,34 +30,34 @@
         $(document).ready(function() {
             $("form[name='frmNuevo']").validate({
                 rules: {
-                    txtCodVet: { required: true, minlength: 3, maxlength: 5},
-                    txtNombre: { required: true, minlength: 3},
-                    cboEspecialidad: { required: true},
-                    txtTelefono: { required: true, minlength: 7},
-                    txtEdad: { required: true, minlength: 1},
-                    txtCorreo: { required: true, minlength: 10}
+                    codVet: { required: true, minlength: 3, maxlength: 5},
+                    nombreVet: { required: true, minlength: 3},
+                    codEsp: { required: true},
+                    telefono: { required: true, minlength: 7},
+                    edad: { required: true, minlength: 1},
+                    correo: { required: true, minlength: 10}
                 },
                 messages: {
-                    txtCodVet: {
+                    codVet: {
                         required: "Ingrese codigo para el veterinario",
                         minlength: "El codigo del veterinario debe contener al menos 3 caracteres y como máximo 5 caracteres"
                     },
-                    txtNombre: {
+                    nombreVet: {
                         required: "Ingrese nombre para el veterinario",
                         minlength: "El nombre del veterinario debe contener al menos 3 caracteres"
                     },
-                    cboEspecialidad: {
+                    codEsp: {
                         required: "Ingrese especialidad para el veterinario"
                     },
-                    txtTelefono: {
+                    telefono: {
                         required: "Ingrese telefono para el veterinario",
                         minlength: "El telefono del veterinario debe contener al menos 7 caracteres"
                     },
-                    txtEdad: {
+                    edad: {
                         required: "Ingrese edad para el veterinario",
                         minlength: "La edad del veterinario debe contener al menos 1 caracter"
                     },
-                    txtCorreo: {
+                    correo: {
                         required: "Ingrese correo para el veterinario",
                         minlength: "El correo del veterinario debe contener al menos 10 caracteres"
                     }
@@ -78,23 +78,23 @@
                     <input type="hidden" name="type" value="registrar">
                     
                     <div class="form-group row">
-                        <label for="txtCodVet" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Codigo Veterinario</label>
+                        <label for="codVet" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Codigo Veterinario</label>
                         <div class="col-lg-9 col-md-9 col-sm-9">
-                            <input type="text" th:field="*{codVet}" name="txtCodVet" id="txtCodVet" style="width: 100%">
+                            <input type="text" th:field="*{codVet}" style="width: 100%">
                         </div>
                     </div>
                     
                     <div class="form-group row">
-                        <label for="txtNombre" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Nombre Veterinario</label>
+                        <label for="nombreVet" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Nombre Veterinario</label>
                         <div class="col-lg-9 col-md-9 col-sm-9">
-                            <input type="text" th:field="*{nombreVet}" name="txtNombre" id="txtNombre" style="width: 100%">
+                            <input type="text" th:field="*{nombreVet}" style="width: 100%">
                         </div>
                     </div>
                     
                     <div class="form-group row">
-                        <label for="cboEspecialidad" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Especialidad</label>
+                        <label for="codEsp" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Especialidad</label>
                         <div class="col-lg-9 col-md-9 col-sm-9">
-                            <select th:field="*{codEsp}" name="cboEspecialidad" id="cboEspecialidad" style="width: 100%">
+                            <select th:field="*{codEsp}" style="width: 100%">
                                 <option value="">Seleccione una especialidad</option>
                                 
                                 <option th:each="item : ${dataEspecialidad}" 
@@ -107,23 +107,23 @@
                     </div>
                     
                     <div class="form-group row">
-                        <label for="txtTelefono" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Telefono</label>
+                        <label for="telefono" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Telefono</label>
                         <div class="col-lg-9 col-md-9 col-sm-9">
-                            <input type="text" th:field="*{telefono}" name="txtTelefono" id="txtTelefono" style="width: 100%">
+                            <input type="text" th:field="*{telefono}" style="width: 100%">
                         </div>
                     </div>
                     
                     <div class="form-group row">
-                        <label for="txtEdad" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Edad</label>
+                        <label for="edad" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Edad</label>
                         <div class="col-lg-9 col-md-9 col-sm-9">
-                            <input type="number" th:field="*{edad}"  name="txtEdad" id="txtEdad" style="width: 100%">
+                            <input type="number" th:field="*{edad}" style="width: 100%">
                         </div>
                     </div>
                     
                     <div class="form-group row">
-                        <label for="txtCorreo" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Correo</label>
+                        <label for="correo" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Correo</label>
                         <div class="col-lg-9 col-md-9 col-sm-9">
-                            <input type="text" th:field="*{correo}" name="txtCorreo" id="txtCorreo" style="width: 100%">
+                            <input type="text" th:field="*{correo}" style="width: 100%">
                         </div>
                     </div>
                     

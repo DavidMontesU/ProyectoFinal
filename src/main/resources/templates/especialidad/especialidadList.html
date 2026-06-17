@@ -18,7 +18,7 @@
             <div class="col-12 mb-3">
                 <div class="d-flex justify-content-between align-items-center">
                     <h3 class="mb-0">Listado de Especialidades</h3>
-                    <a th:href="@{/ServletEspecialidad(type='nuevo')}" class="crd-btn crd-btn-nuevo">Nueva Especialidad</a>
+                    <a th:href="@{/especialidad/nuevo}" class="crd-btn crd-btn-nuevo">Nueva Especialidad</a>
                 </div>
             </div>
         </div>
@@ -46,16 +46,13 @@
                             <td th:text="${item.codEsp}"></td>
                             <td th:text="${item.descripcion}"></td>
                             <td>
-                                <form th:action="@{/ServletEspecialidad}" method="get" style="display:inline;">
-                                    <input type="hidden" name="type" value="infoEdit">
-                                    <input type="hidden" name="codEsp" th:value="${item.codEsp}">
+                                <form th:action="@{/especialidad/infoEdit/{id}(id=${item.idEspecialidad})}" method="get" style="display:inline;">
                                     <button type="submit" class="crd-btn crd-btn-editar">Editar</button>
                                 </form>
                                 
-                                <form th:action="@{/ServletEspecialidad}" method="post" style="display:inline;"
+                                <form th:action="@{/especialidad/eliminar}" method="post" style="display:inline;"
                                     onsubmit="return confirm('¿Seguro que deseas eliminar esta especialidad?');">
-                                    <input type="hidden" name="type" value="eliminar">
-                                    <input type="hidden" name="cod" th:value="${item.codEsp}">
+                                    <input type="hidden" name="id" th:value="${item.idEspecialidad}">
                                     <button type="submit" class="crd-btn crd-btn-eliminar">Eliminar</button>
                                 </form>
                             </td>

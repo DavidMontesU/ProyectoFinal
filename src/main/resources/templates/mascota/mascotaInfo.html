@@ -31,9 +31,7 @@
                 <hr>
                 
                 <div class="d-flex justify-content-between">
-                    <form th:action="@{/ServletHistorial}" method="post">
-                        <input type="hidden" name="type" value="verHistorial">
-                        <input type="hidden" name="idMascota" th:value="${dataMascota?.idMascota}">
+                    <form th:action="@{/historial/lista/{id}(id=${dataMascota?.idMascota})}" method="get">
                         <button type="submit" class="crd-btn crd-btn-nuevo">
                             📋 Ver Historial Clínico
                         </button>

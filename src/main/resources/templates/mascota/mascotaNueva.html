@@ -22,34 +22,34 @@
         $(document).ready(function() {
             $("form[name='frmNuevo']").validate({
                 rules: {
-                    txtNombre: { required: true, minlength: 2},
-                    cboEspecie: { required: true},
-                    txtRaza: { required: true, minlength: 2},
-                    txtEdad: { required: true, min: 0},
-                    txtPeso: { required: true, min: 0},
-                    cboCliente: { required: true}
+                    nombreMascota: { required: true, minlength: 2},
+                    idEspecie: { required: true},
+                    raza: { required: true, minlength: 2},
+                    edad: { required: true, min: 0},
+                    peso: { required: true, min: 0},
+                    idCliente: { required: true}
                 },
                 messages: {
-                    txtNombre: {
+                    nombreMascota: {
                         required: "Ingrese nombre de la mascota",
                         minlength: "El nombre debe contener al menos 2 caracteres"
                     },
-                    cboEspecie: {
+                    idEspecie: {
                         required: "Seleccione una especie"
                     },
-                    txtRaza: {
+                    raza: {
                         required: "Ingrese la raza",
                         minlength: "La raza debe contener al menos 2 caracteres"
                     },
-                    txtEdad: {
+                    edad: {
                         required: "Ingrese la edad",
                         min: "La edad no puede ser negativa"
                     },
-                    txtPeso: {
+                    peso: {
                         required: "Ingrese el peso",
                         min: "El peso no puede ser negativo"
                     },
-                    cboCliente: {
+                    idCliente: {
                         required: "Seleccione un dueño"
                     }
                 }
@@ -65,20 +65,19 @@
                 <h4>Formulario de Registro de Mascota</h4>
                 <hr>
                 
-                <form th:action="@{/ServletMascota}" method="post" name="frmNuevo">
-                    <input type="hidden" name="type" value="registrar">
+                <form th:action="@{/mascotas/registrar}" th:object="${mascotaDataEdit}" method="post" name="frmNuevo">
                     
                     <div class="form-group row">
-                        <label for="txtNombre" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Nombre Mascota</label>
+                        <label for="nombreMascota" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Nombre Mascota</label>
                         <div class="col-lg-9 col-md-9 col-sm-9">
-                            <input type="text" name="txtNombre" id="txtNombre" style="width: 100%">
+                            <input type="text" th:field="*{nombreMascota}" style="width: 100%">
                         </div>
                     </div>
                     
                     <div class="form-group row">
-                        <label for="cboEspecie" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Especie</label>
+                        <label for="idEspecie" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Especie</label>
                         <div class="col-lg-9 col-md-9 col-sm-9">
-                            <select name="cboEspecie" id="cboEspecie" style="width: 100%">
+                            <select th:field="*{idEspecie}" style="width: 100%">
                                 <option value="">Seleccione una especie</option>
                                 
                                 <option th:each="item : ${dataEspecie}" 
@@ -91,30 +90,30 @@
                     </div>
                     
                     <div class="form-group row">
-                        <label for="txtRaza" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Raza</label>
+                        <label for="raza" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Raza</label>
                         <div class="col-lg-9 col-md-9 col-sm-9">
-                            <input type="text" name="txtRaza" id="txtRaza" style="width: 100%">
+                            <input type="text" th:field="*{raza}" style="width: 100%">
                         </div>
                     </div>
                     
                     <div class="form-group row">
-                        <label for="txtEdad" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Edad (años)</label>
+                        <label for="edad" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Edad (años)</label>
                         <div class="col-lg-9 col-md-9 col-sm-9">
-                            <input type="number" name="txtEdad" id="txtEdad" style="width: 100%">
+                            <input type="number" th:field="*{edad}" style="width: 100%">
                         </div>
                     </div>
                     
                     <div class="form-group row">
-                        <label for="txtPeso" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Peso (kg)</label>
+                        <label for="peso" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Peso (kg)</label>
                         <div class="col-lg-9 col-md-9 col-sm-9">
-                            <input type="number" step="0.01" name="txtPeso" id="txtPeso" style="width: 100%">
+                            <input type="number" step="0.01" th:field="*{peso}" style="width: 100%">
                         </div>
                     </div>
                     
                     <div class="form-group row">
-                        <label for="cboCliente" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Dueño</label>
+                        <label for="idCliente" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Dueño</label>
                         <div class="col-lg-9 col-md-9 col-sm-9">
-                            <select name="cboCliente" id="cboCliente" style="width: 100%">
+                            <select th:field="*{idCliente}" style="width: 100%">
                                 <option value="">Seleccione un dueño</option>
                                 
                                 <option th:each="item : ${dataCliente}" 
@@ -127,9 +126,9 @@
                     </div>
                     
                     <div class="form-group row">
-                        <label for="txtObservaciones" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Observaciones</label>
+                        <label for="observaciones" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Observaciones</label>
                         <div class="col-lg-9 col-md-9 col-sm-9">
-                            <textarea name="txtObservaciones" id="txtObservaciones" rows="3" style="width: 100%"></textarea>
+                            <textarea th:field="*{observaciones}" rows="3" style="width: 100%"></textarea>
                         </div>
                     </div>
                     
@@ -140,7 +139,7 @@
                             <input type="submit" class="btn btn-success" value="Registrar">
                         </div>
                         <div class="col-lg-9 col-md-9 col-sm-9">
-                            <a th:href="@{/ServletMascota(type='listar')}" class="btn btn-primary">Regresar</a>
+                            <a th:href="@{/mascotas/lista}" class="btn btn-primary">Regresar</a>
                         </div>
                     </div>
                 </form>

@@ -35,7 +35,8 @@ public class VeterinarioController {
 		model.addAttribute("dataVeterinarios", veterinarios);
 		model.addAttribute("cantReg", veterinarios.size());
 		model.addAttribute("titulo", "Lista completa de veterinarios");
-		return "veterinario/veterinarioList";
+		model.addAttribute("content", "veterinario/veterinarioList");
+		return "layout";
 	}
 	
 	@GetMapping("/nuevo")
@@ -43,29 +44,29 @@ public class VeterinarioController {
 		model.addAttribute("registro", new Veterinario());
 		model.addAttribute("dataEspecialidad", especialidadService.listarTodas());
 		model.addAttribute("titulo", "Registrar nuevo veterinario");
-		return "veterinario/veterinarioNuevo";
+		model.addAttribute("content", "veterinario/veterinarioNuevo");
+		return "layout";
 	}
 	
-	@PostMapping("/registrar")
+    @PostMapping("/registrar")
     public String guardar(@ModelAttribute("registro") Veterinario veterinario, Model model, RedirectAttributes ra) {
 		System.out.println(veterinario);
         try {
         	
-        	if(veterinario.getIdVet() == null) {
+        	if (veterinario.getIdVet() == null) {
         		veterinarioService.registrarVeterinario(veterinario);
-        	}else {
+        	} else {
         		veterinarioService.actualizarVeterinario(veterinario);
         	}
-        
-        	
+            
             ra.addFlashAttribute("msgExito", "Veterinario guardado correctamente.");
             return "redirect:/veterinarios/lista";
         } catch (Exception e) {
-            
             model.addAttribute("msgError", e.getMessage());
             model.addAttribute("registro", veterinario);
             model.addAttribute("titulo", veterinario.getIdVet() == null ? "Registrar Nuevo Veterionario" : "Editar Veterinario");
-            return "veterinario/veterinarioNuevo"; 
+            model.addAttribute("content", "veterinario/veterinarioNuevo");
+            return "layout"; 
         }
     }
 	
@@ -74,7 +75,8 @@ public class VeterinarioController {
 		Veterinario veterinario = veterinarioService.obtenerPorId(id).orElse(null);
 		model.addAttribute("registro", veterinario);
 		model.addAttribute("dataEspecialidad", especialidadService.listarTodas());
-		return "veterinario/veterinarioEdit";
+		model.addAttribute("content", "veterinario/veterinarioEdit");
+		return "layout";
 	}
 	
 }

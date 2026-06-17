@@ -30,7 +30,7 @@
                 
                 <div class="d-flex justify-content-between">
                     <a th:if="${dataCita.estado == 'Atendida'}" 
-                       th:href="@{/ServletHistorial(type='nuevo', idCita=${dataCita.idCita})}"
+                       th:href="@{/historial/nuevo(idCita=${dataCita.idCita})}"
                        class="crd-btn crd-btn-nuevo">
                         📝 Registrar Historial Clínico
                     </a>

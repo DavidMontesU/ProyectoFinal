@@ -17,7 +17,7 @@
             <div class="col-12 mb-3">
                 <div class="d-flex justify-content-between align-items-center">
                     <h3 class="mb-0">Listado de Tipos de Servicio</h3>
-                    <a th:href="@{/ServletTipoServicio(type='nuevo')}" class="crd-btn crd-btn-nuevo">Nuevo Tipo Servicio</a>
+                    <a th:href="@{/tiposServicio/nuevo}" class="crd-btn crd-btn-nuevo">Nuevo Tipo Servicio</a>
                 </div>
             </div>
         </div>
@@ -49,15 +49,12 @@
                             <td th:text="|S/. ${item.precio}|"></td>
                             
                             <td>
-                                <form th:action="@{/ServletTipoServicio}" method="get" style="display:inline;">
-                                    <input type="hidden" name="type" value="infoEdit">
-                                    <input type="hidden" name="id" th:value="${item.idTipoServicio}">
+                                <form th:action="@{/tiposServicio/infoEdit/{id}(id=${item.idTipoServicio})}" method="get" style="display:inline;">
                                     <button type="submit" class="crd-btn crd-btn-editar">Editar</button>
                                 </form>
                                 
-                                <form th:action="@{/ServletTipoServicio}" method="post" style="display:inline;"
-                                    onsubmit="return confirm('¿Seguro que deseas eliminar este servicio?');">
-                                    <input type="hidden" name="type" value="eliminar">
+                                <form th:action="@{/tiposServicio/eliminar}" method="post" style="display:inline;"
+                                    onsubmit="return confirm('¿Seguro que deseas eliminar este tipo de servicio?');">
                                     <input type="hidden" name="id" th:value="${item.idTipoServicio}">
                                     <button type="submit" class="crd-btn crd-btn-eliminar">Eliminar</button>
                                 </form>

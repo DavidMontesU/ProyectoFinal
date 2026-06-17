@@ -11,7 +11,7 @@
             <div class="col-12 mb-3">
                 <div class="d-flex justify-content-between align-items-center">
                     <h3 class="mb-0">Listado de Mascotas</h3>
-                    <a th:href="@{/ServletMascota(type='nuevo')}" class="crd-btn crd-btn-nuevo">Nueva Mascota</a>
+                    <a th:href="@{/mascotas/nuevo}" class="crd-btn crd-btn-nuevo">Nueva Mascota</a>
                 </div>
             </div>
         </div>
@@ -21,9 +21,8 @@
                 <h6 align="left" th:text="${cantReg + ' registros encontrados'}">0 registros encontrados</h6>
             </div>
             <div class="col-lg-7 col-md-7 col-sm-7">
-                <form th:action="@{/ServletMascota}" method="post">
+                <form th:action="@{/mascotas/buscar}" method="post">
                     <label>Buscar por nombre: </label>
-                    <input type="hidden" name="type" value="buscar">
                     <input type="text" class="" name="txtBuscar">
                     <input type="submit" value="Buscar">
                 </form>
@@ -57,30 +56,23 @@
                             <td th:text="${item.peso}"></td>
                             <td th:text="${item.nombreDueno}"></td>
                             <td>
-                                <form th:action="@{/ServletMascota}" method="get" style="display:inline;">
-                                    <input type="hidden" name="type" value="info">
-                                    <input type="hidden" name="id" th:value="${item.idMascota}">
+                                <form th:action="@{/mascotas/info/{id}(id=${item.idMascota})}" method="get" style="display:inline;">
                                     <button type="submit" class="crd-btn crd-btn-detalle">Ver Detalle</button>
                                 </form>
                                 
-                                <form th:action="@{/ServletHistorial}" method="post" style="display:inline;">
-                                    <input type="hidden" name="type" value="verHistorial">
-                                    <input type="hidden" name="idMascota" th:value="${item.idMascota}">
+                                <form th:action="@{/historial/lista/{idMascota}(idMascota=${item.idMascota})}" method="get" style="display:inline;">
                                     <button type="submit" class="btn btn-success" 
                                             style="font-size:12px; padding:8px 12px; border-radius:5px;">
                                         📋 Historial
                                     </button>
                                 </form>
                                 
-                                <form th:action="@{/ServletMascota}" method="get" style="display:inline;">
-                                    <input type="hidden" name="type" value="infoEdit">
-                                    <input type="hidden" name="id" th:value="${item.idMascota}">
+                                <form th:action="@{/mascotas/infoEdit/{id}(id=${item.idMascota})}" method="get" style="display:inline;">
                                     <button type="submit" class="crd-btn crd-btn-editar">Editar</button>
                                 </form>
                                 
-                                <form th:action="@{/ServletMascota}" method="post" style="display:inline;"
+                                <form th:action="@{/mascotas/eliminar}" method="post" style="display:inline;"
                                     onsubmit="return confirm('¿Seguro que deseas eliminar esta mascota?');">
-                                    <input type="hidden" name="type" value="eliminar">
                                     <input type="hidden" name="id" th:value="${item.idMascota}">
                                     <button type="submit" class="crd-btn crd-btn-eliminar">Eliminar</button>
                                 </form>

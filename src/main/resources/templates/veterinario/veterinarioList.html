@@ -28,7 +28,7 @@
                 <h6 align="left" th:text="${cantReg + ' registros encontrados'}">0 registros encontrados</h6>
             </div>
             <div class="col-lg-7 col-md-7 col-sm-7">
-                <form th:action="@{/ServletVeterinario}" method="post">
+                <form th:action="@{/veterinarios/buscar}" method="post">
                     <label>Escribir nombre: </label>
                     <input type="hidden" name="type" value="buscar">
                     <input type="text" class="" name="txtBuscar">
@@ -65,9 +65,7 @@
                             <td th:text="${item.edad}"></td>
                             <td th:text="${item.correo}"></td>
                             <td>
-                                <form th:action="@{/ServletVeterinario}" method="get" style="display:inline;">
-                                    <input type="hidden" name="type" value="info">
-                                    <input type="hidden" name="id" th:value="${item.idVet}">
+                                <form th:action="@{/veterinarios/infoEdit/{id}(id=${item.idVet})}" method="get" style="display:inline;">
                                     <button type="submit" class="crd-btn crd-btn-detalle">Ver Detalle</button>
                                 </form>
                                 
@@ -77,9 +75,8 @@
                                     <button type="submit" class="crd-btn crd-btn-editar">Editar</button>
                                 </form>
                                 
-                                <form th:action="@{/ServletVeterinario}" method="post" style="display:inline;"
+                                <form th:action="@{/veterinarios/eliminar}" method="post" style="display:inline;"
                                     onsubmit="return confirm('¿Seguro que deseas eliminar este veterinario?');">
-                                    <input type="hidden" name="type" value="eliminar">
                                     <input type="hidden" name="id" th:value="${item.idVet}">
                                     <button type="submit" class="crd-btn crd-btn-eliminar">Eliminar</button>
                                 </form>

@@ -22,15 +22,15 @@
         $(document).ready(function() {
             $("form[name='frmNuevo']").validate({
                 rules: {
-                    txtDiagnostico: { required: true, minlength: 10},
-                    txtTratamiento: { required: true, minlength: 10}
+                    diagnostico: { required: true, minlength: 10},
+                    tratamiento: { required: true, minlength: 10}
                 },
                 messages: {
-                    txtDiagnostico: {
+                    diagnostico: {
                         required: "Ingrese el diagnostico",
                         minlength: "El diagnostico debe contener al menos 10 caracteres"
                     },
-                    txtTratamiento: {
+                    tratamiento: {
                         required: "Ingrese el tratamiento",
                         minlength: "El tratamiento debe contener al menos 10 caracteres"
                     }
@@ -47,43 +47,42 @@
                 <h4>Formulario de Registro de Historial Clínico</h4>
                 <hr>
                 
-                <form th:action="@{/ServletHistorial}" method="post" name="frmNuevo">
-                    <input type="hidden" name="type" value="registrar">
+                <form th:action="@{/historial/registrar}" th:object="${historialDataEdit}" method="post" name="frmNuevo">
                     
-                    <input type="hidden" name="idCita" th:value="${idCita}">
+                    <input type="hidden" th:field="*{idCita}">
                     
                     <div class="alert alert-info">
-                        <strong>Cita ID:</strong> <span th:text="${idCita}"></span>
+                        <strong>Cita ID:</strong> <span th:text="*{idCita}"></span>
                     </div>
                     
                     <div class="form-group row">
-                        <label for="txtDiagnostico" class="col-lg-2 col-md-2 col-sm-2 col-form-label">Diagnóstico</label>
+                        <label for="diagnostico" class="col-lg-2 col-md-2 col-sm-2 col-form-label">Diagnóstico</label>
                         <div class="col-lg-10 col-md-10 col-sm-10">
-                            <textarea name="txtDiagnostico" id="txtDiagnostico" rows="4" 
+                            <textarea th:field="*{diagnostico}" rows="4" 
                                       style="width: 100%" placeholder="Ingrese el diagnostico detallado"></textarea>
                         </div>
                     </div>
                     
                     <div class="form-group row">
-                        <label for="txtTratamiento" class="col-lg-2 col-md-2 col-sm-2 col-form-label">Tratamiento</label>
+                        <label for="tratamiento" class="col-lg-2 col-md-2 col-sm-2 col-form-label">Tratamiento</label>
                         <div class="col-lg-10 col-md-10 col-sm-10">
-                            <textarea name="txtTratamiento" id="txtTratamiento" rows="4" 
+                            <textarea th:field="*{tratamiento}" rows="4" 
                                       style="width: 100%" placeholder="Ingrese el tratamiento indicado"></textarea>
                         </div>
                     </div>
                     
                     <div class="form-group row">
-                        <label for="txtReceta" class="col-lg-2 col-md-2 col-sm-2 col-form-label">Receta</label>
+                        <label for="receta" class="col-lg-2 col-md-2 col-sm-2 col-form-label">Receta</label>
                         <div class="col-lg-10 col-md-10 col-sm-10">
-                            <textarea name="txtReceta" id="txtReceta" rows="3" 
+                            <textarea th:field="*{receta}" rows="3" 
                                       style="width: 100%" placeholder="Ingrese la receta medica"></textarea>
                         </div>
                     </div>
                     
                     <div class="form-group row">
-                        <label for="txtProximaCita" class="col-lg-2 col-md-2 col-sm-2 col-form-label">Próxima Cita</label>
+                        <label for="proximaCita" class="col-lg-2 col-md-2 col-sm-2 col-form-label">Próxima Cita</label>
                         <div class="col-lg-10 col-md-10 col-sm-10">
-                            <input type="date" name="txtProximaCita" id="txtProximaCita" style="width: 100%">
+                            <input type="date" th:field="*{proximaCita}" style="width: 100%">
                             <small class="form-text text-muted">Opcional - Fecha de la proxima cita de control</small>
                         </div>
                     </div>
@@ -95,7 +94,7 @@
                             <input type="submit" class="btn btn-success" value="Registrar Historial">
                         </div>
                         <div class="col-lg-9 col-md-9 col-sm-9">
-                            <a th:href="@{/ServletCita(type='listar')}" class="btn btn-primary">Regresar a Citas</a>
+                            <a th:href="@{/citas/lista}" class="btn btn-primary">Regresar a Citas</a>
                         </div>
                     </div>
                 </form>

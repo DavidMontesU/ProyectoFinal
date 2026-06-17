@@ -29,36 +29,36 @@
         $(document).ready(function() {
             $("form[name='frmNuevo']").validate({
                 rules: {
-                    txtDni: { required: true, minlength: 8, maxlength: 8},
-                    txtNombre: { required: true, minlength: 3},
-                    txtApellido: { required: true, minlength: 3},
-                    txtTelefono: { required: true, minlength: 7},
-                    txtDireccion: { required: true, minlength: 5},
-                    txtCorreo: { required: true, email: true}
+                    dni: { required: true, minlength: 8, maxlength: 8},
+                    nombreCliente: { required: true, minlength: 3},
+                    apellidoCliente: { required: true, minlength: 3},
+                    telefono: { required: true, minlength: 7},
+                    direccion: { required: true, minlength: 5},
+                    correo: { required: true, email: true}
                 },
                 messages: {
-                    txtDni: {
+                    dni: {
                         required: "Ingrese DNI del cliente",
                         minlength: "El DNI debe tener 8 dígitos",
                         maxlength: "El DNI debe tener 8 dígitos"
                     },
-                    txtNombre: {
+                    nombreCliente: {
                         required: "Ingrese nombre del cliente",
                         minlength: "El nombre debe contener al menos 3 caracteres"
                     },
-                    txtApellido: {
+                    apellidoCliente: {
                         required: "Ingrese apellido del cliente",
                         minlength: "El apellido debe contener al menos 3 caracteres"
                     },
-                    txtTelefono: {
+                    telefono: {
                         required: "Ingrese telefono del cliente",
                         minlength: "El telefono debe contener al menos 7 caracteres"
                     },
-                    txtDireccion: {
+                    direccion: {
                         required: "Ingrese direccion del cliente",
                         minlength: "La direccion debe contener al menos 5 caracteres"
                     },
-                    txtCorreo: {
+                    correo: {
                         required: "Ingrese correo del cliente",
                         email: "Ingrese un correo válido"
                     }
@@ -75,21 +75,64 @@
                 <h4>Formulario de Registro de Cliente</h4>
                 <hr>
                 
-                <form th:action="@{/ServletCliente}" method="post" name="frmNuevo">
-                    <input type="hidden" name="type" value="registrar">
+                <form th:action="@{/clientes/registrar}" th:object="${clienteDataEdit}" method="post" name="frmNuevo">
                     
                     <div class="form-group row">
-                        <label for="txtDni" class="col-lg-3 col-md-3 col-sm-3 col-form-label">DNI</label>
+                        <label for="dni" class="col-lg-3 col-md-3 col-sm-3 col-form-label">DNI</label>
                         <div class="col-lg-9 col-md-9 col-sm-9">
-                            <input type="text" name="txtDni" id="txtDni" style="width: 100%">
+                            <input type="text" th:field="*{dni}" style="width: 100%">
                         </div>
                     </div>
                     
                     <div class="form-group row">
-                        <label for="txtNombre" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Nombre</label>
+                        <label for="nombreCliente" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Nombre</label>
                         <div class="col-lg-9 col-md-9 col-sm-9">
-                            <input type="text" name="txtNombre" id="txtNombre" style="width: 100%">
+                            <input type="text" th:field="*{nombreCliente}" style="width: 100%">
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label for="apellidoCliente" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Apellido</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <input type="text" th:field="*{apellidoCliente}" style="width: 100%">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="telefono" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Teléfono</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <input type="text" th:field="*{telefono}" style="width: 100%">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="direccion" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Dirección</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <input type="text" th:field="*{direccion}" style="width: 100%">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="correo" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Correo</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <input type="email" th:field="*{correo}" style="width: 100%">
+                        </div>
+                    </div>
+
+                    <hr>
                     
-                    <div class="form
+                    <div class="form-group row">
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <input type="submit" class="btn btn-success" value="Registrar">
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <a th:href="@{/clientes/lista}" class="btn btn-primary">Regresar</a>
+                        </div>
+                    </div>
+                </form>
+                <br>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3"></div>
+        </div>
+    </div>
+</body>
+</html>

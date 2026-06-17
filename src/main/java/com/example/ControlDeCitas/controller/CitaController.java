@@ -45,7 +45,8 @@ public class CitaController {
 		model.addAttribute("dataCitas", citas);
 		model.addAttribute("cantReg", citas.size());
 		model.addAttribute("titulo", "Lista completa de citas programadas");
-		return "cita/cita-lista";
+		model.addAttribute("content", "cita/cita-lista");
+		return "layout";
 	}
 	
 	@GetMapping("/nuevo")
@@ -55,7 +56,8 @@ public class CitaController {
 		model.addAttribute("dataTipoServicio", tipoServicioService.listarTiposServicios());
 		model.addAttribute("dataVeterinario", veterinarioService.listarTodos());
 		model.addAttribute("titulo", "Registrar nueva cita");
-		return "cita/cita-editar";
+		model.addAttribute("content", "cita/cita-editar");
+		return "layout";
 	}
 
 	@PostMapping("/registrar")
@@ -75,7 +77,8 @@ public class CitaController {
             model.addAttribute("msgError", e.getMessage());
             model.addAttribute("registro", cita);
             model.addAttribute("titulo", cita.getIdCita() == null ? "Registrar Nueva Cita" : "Editar Cita");
-            return "cita/cita-editar"; 
+            model.addAttribute("content", "cita/cita-editar");
+            return "layout"; 
         }
     }
 
@@ -86,7 +89,8 @@ public class CitaController {
 		model.addAttribute("dataMascota", mascotaService.listarTodos());
 		model.addAttribute("dataTipoServicio", tipoServicioService.listarTiposServicios());
 		model.addAttribute("dataVeterinario", veterinarioService.listarTodos());
-		return "cita/cita-editar";
+		model.addAttribute("content", "cita/cita-editar");
+		return "layout";
 	}
 	
 	
@@ -100,7 +104,8 @@ public class CitaController {
 	public String infoCita (@PathVariable("id") Integer id, Model model) {
 		Cita cita = citaService.obtenerCita(id);
 		model.addAttribute("dataCita", cita);
-		return "cita/cita-info";
+		model.addAttribute("content", "cita/cita-info");
+		return "layout";
 	}
 	
 	@GetMapping("/buscar")
@@ -108,6 +113,7 @@ public class CitaController {
 		List<Cita> citas = citaService.obtenerCitaPorFecha(fecha);
 		model.addAttribute("dataCitas", citas);
 		model.addAttribute("cantReg", citas.size());
-		return "cita/cita-lista";
+		model.addAttribute("content", "cita/cita-lista");
+		return "layout";
 	}
 }

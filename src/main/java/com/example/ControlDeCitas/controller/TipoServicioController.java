@@ -19,12 +19,41 @@ public class TipoServicioController {
 	TipoServicioService tipoServicioService;
 	
 	@GetMapping("/lista")
-	public String Listar (Model model) {
+	public String listar (Model model) {
 		List<TipoServicio> dataTipoServicio = tipoServicioService.listarTiposServicios();
 		model.addAttribute("dataTipoServicio", dataTipoServicio);
 		model.addAttribute("cantReg", dataTipoServicio.size());
 		model.addAttribute("titulo", "Lista completa de tipos de servicio");
-		return "tipoServicio/tipoServicioList";
+		model.addAttribute("content", "tipoServicio/tipoServicioList");
+		return "layout";
+	}
+
+	@GetMapping("/nuevo")
+	public String nuevo(Model model) {
+		model.addAttribute("tipoServicioDataEdit", new TipoServicio());
+		model.addAttribute("titulo", "Registrar Nuevo Tipo de Servicio");
+		model.addAttribute("content", "tipoServicio/tipoServicioNuevo");
+		return "layout";
+	}
+
+	@PostMapping("/registrar")
+	public String guardar(@ModelAttribute("tipoServicioDataEdit") TipoServicio tipoServicio,
+						  @org.springframework.web.bind.annotation.RequestParam(value="type", required=false) String type,
+						  Model model, org.springframework.web.servlet.mvc.support.RedirectAttributes ra) {
+		try {
+			if ("editar".equals(type) || (tipoServicio.getIdTipoServicio() != null && tipoServicio.getIdTipoServicio() > 0)) {
+				tipoServicioService.actualizarTipoServicio(tipoServicio.getDescripcion(), tipoServicio.getPrecio(), tipoServicio.getIdTipoServicio());
+			} else {
+				tipoServicioService.registrarTipoServicio(tipoServicio.getDescripcion(), tipoServicio.getPrecio());
+			}
+			ra.addFlashAttribute("msgExito", "Tipo de Servicio guardado correctamente.");
+			return "redirect:/tiposServicio/lista";
+		} catch (Exception e) {
+			model.addAttribute("msgError", e.getMessage());
+			model.addAttribute("tipoServicioDataEdit", tipoServicio);
+			model.addAttribute("content", "editar".equals(type) ? "tipoServicio/tipoServicioEdit" : "tipoServicio/tipoServicioNuevo");
+			return "layout";
+		}
 	}
 
 }

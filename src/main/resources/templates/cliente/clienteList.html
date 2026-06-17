@@ -18,7 +18,7 @@
             <div class="col-12 mb-3">
                 <div class="d-flex justify-content-between align-items-center">
                     <h3 class="mb-0">Listado de Clientes</h3>
-                    <a th:href="@{/ServletCliente(type='nuevo')}" class="crd-btn crd-btn-nuevo">Nuevo Cliente</a>
+                    <a th:href="@{/clientes/nuevo}" class="crd-btn crd-btn-nuevo">Nuevo Cliente</a>
                 </div>
             </div>
         </div>
@@ -28,9 +28,8 @@
                 <h6 align="left" th:text="${cantReg + ' registros encontrados'}">0 registros encontrados</h6>
             </div>
             <div class="col-lg-7 col-md-7 col-sm-7">
-                <form th:action="@{/ServletCliente}" method="post">
+                <form th:action="@{/clientes/buscar}" method="post">
                     <label>Buscar por DNI: </label>
-                    <input type="hidden" name="type" value="buscar">
                     <input type="text" class="" name="txtBuscar">
                     <input type="submit" value="Buscar">
                 </form>
@@ -64,21 +63,16 @@
                             <td th:text="${item.direccion}"></td>
                             <td th:text="${item.correo}"></td>
                             <td>
-                                <form th:action="@{/ServletCliente}" method="get" style="display:inline;">
-                                    <input type="hidden" name="type" value="info">
-                                    <input type="hidden" name="id" th:value="${item.idCliente}">
+                                <form th:action="@{/clientes/info/{id}(id=${item.idCliente})}" method="get" style="display:inline;">
                                     <button type="submit" class="crd-btn crd-btn-detalle">Ver Detalle</button>
                                 </form>
                                 
-                                <form th:action="@{/ServletCliente}" method="get" style="display:inline;">
-                                    <input type="hidden" name="type" value="infoEdit">
-                                    <input type="hidden" name="id" th:value="${item.idCliente}">
+                                <form th:action="@{/clientes/infoEdit/{id}(id=${item.idCliente})}" method="get" style="display:inline;">
                                     <button type="submit" class="crd-btn crd-btn-editar">Editar</button>
                                 </form>
                                 
-                                <form th:action="@{/ServletCliente}" method="post" style="display:inline;"
+                                <form th:action="@{/clientes/eliminar}" method="post" style="display:inline;"
                                     onsubmit="return confirm('¿Seguro que deseas eliminar este cliente?');">
-                                    <input type="hidden" name="type" value="eliminar">
                                     <input type="hidden" name="id" th:value="${item.idCliente}">
                                     <button type="submit" class="crd-btn crd-btn-eliminar">Eliminar</button>
                                 </form>

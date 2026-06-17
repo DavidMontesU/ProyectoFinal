@@ -43,10 +43,10 @@
                             👤 Clientes
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" th:href="@{/ServletCliente(type='listar')}">
+                            <li><a class="dropdown-item" th:href="@{/clientes/lista}">
                                 📋 Gestión de Clientes
                             </a></li>
-                            <li><a class="dropdown-item" th:href="@{/ServletMascota(type='listar')}">
+                            <li><a class="dropdown-item" th:href="@{/mascotas/lista}">
                                 🐕 Gestión de Mascotas
                             </a></li>
                         </ul>
@@ -57,10 +57,10 @@
                             👨‍⚕️ Personal
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" th:href="@{/ServletVeterinario(type='listar')}">
+                            <li><a class="dropdown-item" th:href="@{/veterinarios/lista}">
                                 👨‍⚕️ Veterinarios
                             </a></li>
-                            <li><a class="dropdown-item" th:href="@{/ServletEspecialidad(type='listar')}">
+                            <li><a class="dropdown-item" th:href="@{/especialidad/lista}">
                                 🎓 Especialidades
                             </a></li>
                         </ul>
@@ -71,15 +71,15 @@
                             📅 Atención
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" th:href="@{/ServletCita(type='listar')}">
+                            <li><a class="dropdown-item" th:href="@{/citas/lista}">
                                 📅 Gestión de Citas
                             </a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" th:href="@{/ServletHistorial(type='listar')}">
+                            <li><a class="dropdown-item" th:href="@{/historial/buscar}">
                                 📋 Buscar Historial Clínico
                             </a></li>
                             <li>
-                                <a class="dropdown-item" th:href="@{/ServletMascota(type='listar')}">
+                                <a class="dropdown-item" th:href="@{/mascotas/lista}">
                                     🐾 Ver Mascotas (para Historial)
                                 </a>
                             </li>
@@ -91,16 +91,16 @@
                             ⚙️ Configuración
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" th:href="@{/ServletTipoServicio(type='listar')}">
+                            <li><a class="dropdown-item" th:href="@{/tiposServicio/lista}">
                                 💰 Tipos de Servicio
                             </a></li>
-                            <li><a class="dropdown-item" th:href="@{/ServletUsuario(type='listar')}">
+                            <li><a class="dropdown-item" th:href="@{/usuario/lista}">
                                 👥 Usuarios del Sistema
                             </a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/ServletUsuario(type='logout')}">
+                        <a class="nav-link" th:href="@{/usuario/logout}">
                             🚪 Cerrar Sesión
                         </a>
                     </li>

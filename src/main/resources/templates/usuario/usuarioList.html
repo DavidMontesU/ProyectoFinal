@@ -18,7 +18,7 @@
             <div class="col-12 mb-3">
                 <div class="d-flex justify-content-between align-items-center">
                     <h3 class="mb-0">Listado de Usuarios</h3>
-                    <a th:href="@{/ServletUsuario(type='nuevo')}" class="crd-btn crd-btn-nuevo">Nuevo Usuario</a>
+                    <a th:href="@{/usuario/nuevo}" class="crd-btn crd-btn-nuevo">Nuevo Usuario</a>
                 </div>
             </div>
         </div>
@@ -49,15 +49,12 @@
                             <td th:text="${item.username}"></td>
                             <td th:text="${item.tipoUsuario}"></td>
                             <td>
-                                <form th:action="@{/ServletUsuario}" method="get" style="display:inline;">
-                                    <input type="hidden" name="type" value="infoEdit">
-                                    <input type="hidden" name="id" th:value="${item.idUsuario}">
+                                <form th:action="@{/usuario/infoEdit/{id}(id=${item.idUsuario})}" method="get" style="display:inline;">
                                     <button type="submit" class="crd-btn crd-btn-editar">Editar</button>
                                 </form>
                                 
-                                <form th:action="@{/ServletUsuario}" method="post" style="display:inline;"
+                                <form th:action="@{/usuario/eliminar}" method="post" style="display:inline;"
                                     onsubmit="return confirm('¿Seguro que deseas eliminar este usuario?');">
-                                    <input type="hidden" name="type" value="eliminar">
                                     <input type="hidden" name="id" th:value="${item.idUsuario}">
                                     <button type="submit" class="crd-btn crd-btn-eliminar">Eliminar</button>
                                 </form>
