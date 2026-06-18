@@ -32,7 +32,7 @@ public class EspecialidadController {
 	}
 
 	@PostMapping("/registrar")
-	public String guardar(@ModelAttribute("especialidad") Especialidad especialidad, Model model, RedirectAttributes ra) {
+	public String guardar(@ModelAttribute("especialidadDataEdit") Especialidad especialidad, Model model, RedirectAttributes ra) {
 		try {
 			especialidadService.guardar(especialidad);
 			ra.addFlashAttribute("msgExito", "Especialidad guardada correctamente.");
@@ -42,4 +42,34 @@ public class EspecialidadController {
 			return "redirect:/especialidad/lista";
 		}
 	}
+	@GetMapping("/nuevo")
+	public String nuevo(Model model) {
+		model.addAttribute("especialidadDataEdit", new Especialidad());
+		model.addAttribute("titulo", "Registrar nueva especialidad");
+		model.addAttribute("content", "especialidad/especialidadNueva");
+		return "layout";
+	}
+
+	@GetMapping("/infoEdit/{id}")
+	public String obtenerEspecialidadEdit (@org.springframework.web.bind.annotation.PathVariable("id") String id, Model model) {
+		Especialidad especialidad = especialidadService.obtenerPorId(id).orElse(null);
+		model.addAttribute("especialidadDataEdit", especialidad);
+		model.addAttribute("titulo", "Editar especialidad");
+		model.addAttribute("content", "especialidad/especialidadEdit");
+		return "layout";
+	}
+	
+	@PostMapping("/eliminar")
+	public String eliminar(@org.springframework.web.bind.annotation.RequestParam("id") String id, RedirectAttributes ra) {
+		try {
+			especialidadService.eliminar(id);
+			ra.addFlashAttribute("msgExito", "Especialidad eliminada correctamente.");
+		} catch (org.springframework.dao.DataIntegrityViolationException e) {
+			ra.addFlashAttribute("msgError", "No se puede eliminar la especialidad porque está asignada a uno o más veterinarios.");
+		} catch (Exception e) {
+			ra.addFlashAttribute("msgError", "Error al eliminar la especialidad: " + e.getMessage());
+		}
+		return "redirect:/especialidad/lista";
+	}
+
 }

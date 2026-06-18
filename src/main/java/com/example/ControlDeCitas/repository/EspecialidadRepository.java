@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.example.ControlDeCitas.model.Especialidad;
 
 @Repository
-public interface EspecialidadRepository extends JpaRepository<Especialidad, Integer> {
+public interface EspecialidadRepository extends JpaRepository<Especialidad, String> {
 
 	@Query(value = "CALL sp_listarEspecialidad()", nativeQuery = true)
 	List<Especialidad> listarEspecialidades();

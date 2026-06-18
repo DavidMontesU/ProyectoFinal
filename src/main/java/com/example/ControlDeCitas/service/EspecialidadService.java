@@ -24,5 +24,12 @@ public class EspecialidadService {
 		repo.save(esp);
 	}
 	
+	public java.util.Optional<Especialidad> obtenerPorId(String id) {
+		return repo.findById(id);
+	}
+
+	public void eliminar(String id) {
+		repo.deleteById(id);
+	}
 
 }

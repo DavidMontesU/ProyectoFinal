@@ -78,5 +78,20 @@ public class VeterinarioController {
 		model.addAttribute("content", "veterinario/veterinarioEdit");
 		return "layout";
 	}
+	@PostMapping("/eliminar")
+	public String eliminar(@org.springframework.web.bind.annotation.RequestParam("id") Integer id) {
+		veterinarioService.eliminarVeterinario(id);
+		return "redirect:/veterinarios/lista";
+	}
+
+	@PostMapping("/buscar")
+	public String buscar(@org.springframework.web.bind.annotation.RequestParam("txtBuscar") String txtBuscar, Model model) {
+		List<Veterinario> veterinarios = veterinarioService.buscarPorNombre(txtBuscar);
+		model.addAttribute("dataVeterinarios", veterinarios);
+		model.addAttribute("cantReg", veterinarios.size());
+		model.addAttribute("titulo", "Lista completa de veterinarios");
+		model.addAttribute("content", "veterinario/veterinarioList");
+		return "layout";
+	}
 	
 }

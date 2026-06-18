@@ -14,24 +14,24 @@
                 <h3>Detalle de Mascota</h3>
                 <hr>
                 
-                <p><strong>ID Mascota:</strong> <span th:text="${dataMascota?.idMascota}"></span></p>
-                <p><strong>Nombre:</strong> <span th:text="${dataMascota?.nombreMascota}"></span></p>
-                <p><strong>Especie:</strong> <span th:text="${dataMascota?.nombreEspecie}"></span></p>
-                <p><strong>Raza:</strong> <span th:text="${dataMascota?.raza}"></span></p>
+                <p><strong>ID Mascota:</strong> <span th:text="${mascotaData?.idMascota}"></span></p>
+                <p><strong>Nombre:</strong> <span th:text="${mascotaData?.nombreMascota}"></span></p>
+                <p><strong>Especie:</strong> <span th:text="${mascotaData?.nombreEspecie}"></span></p>
+                <p><strong>Raza:</strong> <span th:text="${mascotaData?.raza}"></span></p>
                 
-                <p><strong>Edad:</strong> <span th:text="${dataMascota?.edad + ' años'}"></span></p>
-                <p><strong>Peso:</strong> <span th:text="${dataMascota?.peso + ' kg'}"></span></p>
-                <p><strong>Dueño:</strong> <span th:text="${dataMascota?.nombreDueno}"></span></p>
+                <p><strong>Edad:</strong> <span th:text="${mascotaData?.edad + ' años'}"></span></p>
+                <p><strong>Peso:</strong> <span th:text="${mascotaData?.peso + ' kg'}"></span></p>
+                <p><strong>Dueño:</strong> <span th:text="${mascotaData?.nombreDueno}"></span></p>
                 
                 <hr>
                 
                 <p><strong>Observaciones:</strong></p>
-                <p style="margin-left:15px;" th:text="${dataMascota?.observaciones ?: 'Sin observaciones'}"></p>
+                <p style="margin-left:15px;" th:text="${mascotaData?.observaciones ?: 'Sin observaciones'}"></p>
                 
                 <hr>
                 
                 <div class="d-flex justify-content-between">
-                    <form th:action="@{/historial/lista/{id}(id=${dataMascota?.idMascota})}" method="get">
+                    <form th:action="@{/historial/lista/{id}(id=${mascotaData?.idMascota})}" method="get">
                         <button type="submit" class="crd-btn crd-btn-nuevo">
                             📋 Ver Historial Clínico
                         </button>
