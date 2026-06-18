@@ -47,11 +47,9 @@ public class MascotaController {
     }
 
     @PostMapping("/registrar")
-    public String guardar(@ModelAttribute("mascotaDataEdit") Mascota mascota,
-                          @RequestParam(value="type", required=false) String type,
-                          Model model, RedirectAttributes ra) {
+    public String guardar(@ModelAttribute("mascotaDataEdit") Mascota mascota, Model model, RedirectAttributes ra) {
         try {
-            if ("editar".equals(type) || (mascota.getIdMascota() > 0)) {
+            if (mascota.getIdMascota() > 0) {
                 mascotaService.actualizarMascota(mascota);
             } else {
                 mascotaService.registrarMascota(mascota);
@@ -63,7 +61,7 @@ public class MascotaController {
             model.addAttribute("mascotaDataEdit", mascota);
             model.addAttribute("dataEspecie", especieService.listarTodas());
             model.addAttribute("dataCliente", clienteService.listarTodos());
-            model.addAttribute("content", "editar".equals(type) ? "mascota/mascotaEdit" : "mascota/mascotaNueva");
+            model.addAttribute("content", (mascota.getIdMascota() > 0) ? "mascota/mascotaEdit" : "mascota/mascotaNueva");
             return "layout";
         }
     }

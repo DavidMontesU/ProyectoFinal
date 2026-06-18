@@ -58,12 +58,10 @@ public class UsuarioController {
 	}
 
     @PostMapping("/registrar")
-    public String registrar(@ModelAttribute("usuarioDataEdit") Usuario usuario,
-                            @RequestParam(value="type", required=false) String type,
-                            Model model, RedirectAttributes ra) {
+    public String registrar(@ModelAttribute("usuarioDataEdit") Usuario usuario, Model model, RedirectAttributes ra) {
         
         try {
-            if ("editar".equals(type) || (usuario.getIdUsuario() != null && usuario.getIdUsuario() > 0)) {
+            if (usuario.getIdUsuario() != null && usuario.getIdUsuario() > 0) {
                 // If editing, usually password is left alone or we should handle it properly
                 // But following original logic:
                 if (usuario.getClave() == null || usuario.getClave().isEmpty()) {
@@ -81,7 +79,7 @@ public class UsuarioController {
         } catch (Exception e) {
             model.addAttribute("msgError", e.getMessage());
             model.addAttribute("usuarioDataEdit", usuario);
-            model.addAttribute("content", "editar".equals(type) ? "usuario/usuarioEdit" : "usuario/usuarioNuevo");
+            model.addAttribute("content", (usuario.getIdUsuario() != null && usuario.getIdUsuario() > 0) ? "usuario/usuarioEdit" : "usuario/usuarioNuevo");
             return "layout";
         }
     }

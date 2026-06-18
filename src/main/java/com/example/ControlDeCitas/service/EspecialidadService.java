@@ -19,5 +19,10 @@ public class EspecialidadService {
 	public List<Especialidad> listarTodas() {
 		return repo.listarEspecialidades();
 	}
+	
+	public void guardar (Especialidad esp) {
+		repo.save(esp);
+	}
+	
 
 }

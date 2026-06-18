@@ -38,11 +38,9 @@ public class ClienteController {
 	}
 
 	@PostMapping("/registrar")
-	public String guardar(@ModelAttribute("clienteDataEdit") Cliente cliente,
-						  @RequestParam(value="type", required=false) String type,
-						  Model model, RedirectAttributes ra) {
+	public String guardar(@ModelAttribute("clienteDataEdit") Cliente cliente, Model model, RedirectAttributes ra) {
 		try {
-			if ("editar".equals(type) || (cliente.getIdCliente() != null && cliente.getIdCliente() > 0)) {
+			if (cliente.getIdCliente() != null && cliente.getIdCliente() > 0) {
 				clienteService.actualizarCliente(cliente);
 			} else {
 				clienteService.registrarCliente(cliente);
@@ -52,7 +50,7 @@ public class ClienteController {
 		} catch (Exception e) {
 			model.addAttribute("msgError", e.getMessage());
 			model.addAttribute("clienteDataEdit", cliente);
-			model.addAttribute("content", "editar".equals(type) ? "cliente/clienteEdit" : "cliente/clienteNuevo");
+			model.addAttribute("content", (cliente.getIdCliente() != null && cliente.getIdCliente() > 0) ? "cliente/clienteEdit" : "cliente/clienteNuevo");
 			return "layout";
 		}
 	}
