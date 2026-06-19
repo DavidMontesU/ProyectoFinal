@@ -58,7 +58,6 @@ $(document).ready(function() {
                 <hr>
                 <form th:action="@{/citas/registrar}" th:object="${registro}" method="post" name="frmNuevo">
                     <input type="hidden" th:field="*{idCita}" />
-                    <input type="hidden" th:field="*{estado}" />
                     <div class="form-group row">
                         <label for="idMascota" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Mascota</label>
                         <div class="col-lg-9 col-md-9 col-sm-9">
@@ -109,6 +108,18 @@ $(document).ready(function() {
                         <label for="horaCita" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Hora</label>
                         <div class="col-lg-9 col-md-9 col-sm-9">
                             <input type="time" th:field="*{horaCita}" style="width: 100%">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="estado" class="col-lg-3 col-md-3 col-sm-3 col-form-label">Estado</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <select th:field="*{estado}" style="width: 100%">
+                                <option value="Pendiente">Pendiente</option>
+                                <option value="Confirmada">Confirmada</option>
+                                <option value="Atendida">Atendida</option>
+                                <option value="Cancelada">Cancelada</option>
+                            </select>
                         </div>
                     </div>
                     

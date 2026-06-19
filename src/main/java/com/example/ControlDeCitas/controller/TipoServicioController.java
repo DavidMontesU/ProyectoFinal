@@ -38,6 +38,18 @@ public class TipoServicioController {
 		return "layout";
 	}
 
+	@GetMapping("/infoEdit/{id}")
+	public String infoEdit(@org.springframework.web.bind.annotation.PathVariable("id") Integer id, Model model) {
+		java.util.Optional<TipoServicio> tipoServicio = tipoServicioService.obtenerTipoServicioPorId(id);
+		if (tipoServicio.isPresent()) {
+			model.addAttribute("tipoServicioDataEdit", tipoServicio.get());
+			model.addAttribute("titulo", "Editar Tipo de Servicio");
+			model.addAttribute("content", "tipoServicio/tipoServicioEdit");
+			return "layout";
+		}
+		return "redirect:/tiposServicio/lista";
+	}
+
 	@PostMapping("/registrar")
 	public String guardar(@ModelAttribute("tipoServicioDataEdit") TipoServicio tipoServicio, Model model, org.springframework.web.servlet.mvc.support.RedirectAttributes ra) {
 		try {
@@ -54,6 +66,17 @@ public class TipoServicioController {
 			model.addAttribute("content", (tipoServicio.getIdTipoServicio() != null && tipoServicio.getIdTipoServicio() > 0) ? "tipoServicio/tipoServicioEdit" : "tipoServicio/tipoServicioNuevo");
 			return "layout";
 		}
+	}
+
+	@PostMapping("/eliminar")
+	public String eliminar(@org.springframework.web.bind.annotation.RequestParam("id") Integer id, org.springframework.web.servlet.mvc.support.RedirectAttributes ra) {
+		try {
+			tipoServicioService.eliminarTipoServicio(id);
+			ra.addFlashAttribute("msgExito", "Tipo de Servicio eliminado correctamente.");
+		} catch (Exception e) {
+			ra.addFlashAttribute("msgError", "Error al eliminar: " + e.getMessage());
+		}
+		return "redirect:/tiposServicio/lista";
 	}
 
 }

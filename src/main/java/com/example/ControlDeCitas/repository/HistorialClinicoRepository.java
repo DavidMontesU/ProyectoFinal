@@ -15,7 +15,15 @@ import com.example.ControlDeCitas.model.HistorialClinico;
 @Repository
 public interface HistorialClinicoRepository extends JpaRepository<HistorialClinico, Integer>{
 	
-	@Query(value = "CALL sp_obtenerHistorialById(:idHistorial)", nativeQuery = true)
+	@Query(value = "SELECT h.idHistorial, h.idCita, h.diagnostico, h.tratamiento, " +
+			"h.receta, h.proximaCita, h.fechaRegistro, " +
+			"c.fechaCita, c.horaCita, c.motivo, " +
+			"v.nombreVet, ts.descripcion AS tipoServicio " +
+			"FROM historialclinico h " +
+			"INNER JOIN cita c ON h.idCita = c.idCita " +
+			"INNER JOIN veterinario v ON c.idVet = v.idVet " +
+			"INNER JOIN tiposervicio ts ON c.idTipoServicio = ts.idTipoServicio " +
+			"WHERE h.idHistorial = :idHistorial", nativeQuery = true)
 	Optional<HistorialClinico> obtenerHistorialPorId(@Param("idHistorial") Integer idHistorial);
 	
 	@Query(value = "CALL sp_obtenerHistorialByMascota(:idMascota)", nativeQuery = true)

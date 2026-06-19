@@ -576,8 +576,9 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE sp_obtenerHistorialById(IN p_idHistorial INT)
 BEGIN
-    SELECT h.idHistorial, h.diagnostico, h.tratamiento,
+    SELECT h.idHistorial, h.idCita, h.diagnostico, h.tratamiento,
            h.receta, h.proximaCita, h.fechaRegistro,
+           c.fechaCita, c.horaCita, c.motivo,
            v.nombreVet,
            ts.descripcion AS tipoServicio
     FROM HistorialClinico h

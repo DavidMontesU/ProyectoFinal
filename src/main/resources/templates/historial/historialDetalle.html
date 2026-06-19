@@ -13,31 +13,31 @@
         <hr>
         
         <div class="mb-3">
-            <p><strong>Veterinario:</strong> <span th:text="${historial?.nombreVet}"></span></p>
-            <p><strong>Servicio:</strong> <span th:text="${historial?.tipoServicio}"></span></p>
-            <p><strong>Fecha Registro:</strong> <span th:text="${historial?.fechaRegistro}"></span></p>
+            <p><strong>Veterinario:</strong> <span th:text="${historialData?.nombreVet}"></span></p>
+            <p><strong>Servicio:</strong> <span th:text="${historialData?.tipoServicio}"></span></p>
+            <p><strong>Fecha Registro:</strong> <span th:text="${historialData?.fechaRegistro}"></span></p>
         </div>
         
         <hr>
         
         <div class="mb-3">
             <label><strong>Diagnóstico</strong></label>
-            <p class="mt-2" th:text="${historial?.diagnostico}"></p>
+            <p class="mt-2" th:text="${historialData?.diagnostico}"></p>
         </div>
         
         <div class="mb-3">
             <label><strong>Tratamiento</strong></label>
-            <p class="mt-2" th:text="${historial?.tratamiento}"></p>
+            <p class="mt-2" th:text="${historialData?.tratamiento}"></p>
         </div>
         
         <div class="mb-3">
             <label><strong>Receta</strong></label>
-            <p class="mt-2" th:text="${historial?.receta}"></p>
+            <p class="mt-2" th:text="${historialData?.receta}"></p>
         </div>
         
         <div class="mb-3">
             <label><strong>Próxima Cita</strong></label>
-            <p class="mt-2" th:text="${historial?.proximaCita}"></p>
+            <p class="mt-2" th:text="${historialData?.proximaCita}"></p>
         </div>
         
         <hr>
